@@ -1,0 +1,73 @@
+parameters:
+    teapot.forum.url.use_id: false
+
+    teapot_forum.access_permission_service.class:   Teapot\Base\ForumBundle\Service\AccessPermissionService
+    teapot_forum.board_service.class:               Teapot\Base\ForumBundle\Service\BoardService
+    teapot_forum.flag_service.class:                Teapot\Base\ForumBundle\Service\FlagService
+    teapot_forum.topic_service.class:               Teapot\Base\ForumBundle\Service\TopicService
+    teapot_forum.message_service.class:             Teapot\Base\ForumBundle\Service\MessageService
+    teapot_forum.message_star_service.class:        Teapot\Base\ForumBundle\Service\MessageStarService
+    teapot_forum.moderation_service.class:          Teapot\Base\ForumBundle\Service\ModerationService
+    teapot_forum.main_service.class:                Teapot\Base\ForumBundle\Service\MainService
+    teapot_forum.flag_service.class:                Teapot\Base\ForumBundle\Service\PathService
+    teapot_forum.path_service.class:                Teapot\Base\ForumBundle\Service\UserStatService
+    teapot_forum.access_permission_extension.class: Teapot\Base\ForumBundle\Extension\AccessPermission
+    teapot_forum.data_access_extension.class:       Teapot\Base\ForumBundle\Extension\DataAccess
+    teapot_forum.date_extension.class:              Teapot\Base\ForumBundle\Extension\Date
+    teapot_forum.path_extension.class:              Teapot\Base\ForumBundle\Extension\Path
+
+    teapot_forum.board_repository.class:        'TeapotBaseForumBundle:Board'
+    teapot_forum.flag_repository.class:         'TeapotBaseForumBundle:Flag'
+    teapot_forum.topic_repository.class:        'TeapotBaseForumBundle:Topic'
+    teapot_forum.message_repository.class:      'TeapotBaseForumBundle:Message'
+    teapot_forum.message_star_repository.class: 'TeapotBaseForumBundle:MessageStar'
+    teapot_forum.moderation_repository.class:   'TeapotBaseForumBundle:Moderation'
+    teapot_forum.user_stat_repository.class:    'TeapotBaseForumBundle:UserStat'
+
+services:
+    teapot.forum.access_permission:
+        class: %teapot_forum.access_permission_service.class%
+        arguments: [@service_container]
+    teapot.forum.board:
+        class: %teapot_forum.board_service.class%
+        arguments: [@service_container]
+    teapot.forum.flag:
+        class: %teapot_forum.flag_service.class%
+        arguments: [@service_container]
+    teapot.forum.topic:
+        class: %teapot_forum.topic_service.class%
+        arguments: [@service_container]
+    teapot.forum.message:
+        class: %teapot_forum.message_service.class%
+        arguments: [@service_container]
+    teapot.forum.message_star:
+        class: %teapot_forum.message_star_service.class%
+        arguments: [@service_container]
+    teapot.forum.moderation:
+        class: %teapot_forum.moderation_service.class%
+        arguments: [@service_container]
+    teapot.forum.path:
+        class: %teapot_forum.path_service.class%
+        arguments: [@service_container]
+    teapot.forum.user_stat:
+        class: %teapot_forum.user_stat_service.class%
+        arguments: [@service_container]
+    teapot.forum:
+        class: %teapot_forum.main_service.class%
+        arguments: [@service_container]
+    teapot.extension.access_permission:
+        class: %teapot_forum.access_permission_extension.class%
+        tags: [{ name: twig.extension }]
+        arguments: [@service_container]
+    teapot.extension.data_access:
+        class: %teapot_forum.data_access_extension.class%
+        tags: [{ name: twig.extension }]
+        arguments: [@service_container]
+    teapot.extension.date:
+        class: %teapot_forum.date_extension.class%
+        tags: [{ name: twig.extension }]
+        arguments: [@service_container]
+    teapot.extension.path:
+        class: %teapot_forum.path_extension.class%
+        tags: [{ name: twig.extension }]
+        arguments: [@service_container]

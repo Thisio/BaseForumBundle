@@ -1,0 +1,27 @@
+TeapotBaseForumBundle_listMessages:
+    pattern:  /list-messages/{topicId}/
+    defaults: { _controller: TeapotBaseForumBundle:Module:listMessages }
+
+TeapotBaseForumBundle_listTopics:
+    pattern:  /list-topics/
+    defaults: { _controller: TeapotBaseForumBundle:Module:listTopics }
+
+TeapotBaseForumBundle_listTopicsInBoard:
+    pattern:  /list-topics/{boardId}/
+    defaults: { _controller: TeapotBaseForumBundle:Module:listTopics }
+
+TeapotBaseForumBundle_listBoards:
+    pattern:  /list-boards/
+    defaults: { _controller: TeapotBaseForumBundle:Module:listBoards }
+
+TeapotBaseForumBundle_newMessage:
+    pattern:  /new-message/{topicId}/
+    defaults: { _controller: TeapotBaseForumBundle:Module:newMessage }
+
+TeapotBaseForumBundle_newTopic:
+    pattern:  /new-topic/{boardId}/
+    defaults: { _controller: TeapotBaseForumBundle:Module:newTopic }
+
+TeapotBaseForumBundle_newBoard:
+    pattern:  /new-board/
+    defaults: { _controller: TeapotBaseForumBundle:Module:newBoard }

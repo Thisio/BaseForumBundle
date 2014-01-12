@@ -1,0 +1,31 @@
+{
+    "name": "teapot/base/forum-bundle",
+    "type": "symfony-bundle",
+    "description": "ForumBundle for Symfony2",
+    "keywords": ["Forum", "Messages", "Private Messages"],
+    "homepage": "https://github.com/Teapot/BaseForumBundle",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Thomas Potaire",
+            "email": "thomas@idbloc.net"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.2",
+        "symfony/framework-bundle": "2.1.*",
+        "symfony/security-bundle": "2.1.*"
+    },
+    "require-dev": {
+        "twig/twig": "*",
+        "doctrine/doctrine-bundle": "*",
+        "doctrine/mongodb-odm-bundle": "*",
+        "swiftmailer/swiftmailer": "*",
+        "symfony/yaml": "2.1.*",
+        "symfony/validator": "2.1.*"
+    },
+    "autoload": {
+        "psr-0": { "Teapot\\Base\\ForumBundle": "" }
+    },
+    "target-dir": "Teapot/Base/ForumBundle"
+}

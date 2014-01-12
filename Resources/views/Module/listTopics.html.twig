@@ -1,0 +1,9 @@
+<ul>
+  {% for topic in topics %}
+	  <li>
+	    {#<a href="{{ path("TeapotBaseForumBundle_listMessages", {boardSlug: topic.board.slug, boardId: topic.board.id, topicSlug: topic.slug, topicId: topic.id}) }}">
+	    	{{ topic.title }}
+	    </a>#}
+	  </li>
+  {% endfor %}
+</ul>
