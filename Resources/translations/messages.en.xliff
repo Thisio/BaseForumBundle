@@ -24,7 +24,7 @@
             </trans-unit>
             <trans-unit id="6">
                 <source>Add.a.new.message</source>
-                <target>Participate in the conversation; add a new message!</target>
+                <target>Click here and start typing your message.</target>
             </trans-unit>
             <trans-unit id="7"> <!-- Used for an anchor, don't use spaces -->
                 <source>bottom</source>
@@ -360,11 +360,11 @@
             </trans-unit>
             <trans-unit id="90">
                 <source>Expand.all</source>
-                <target>Expand.all</target>
+                <target>Expand all</target>
             </trans-unit>
             <trans-unit id="91">
                 <source>Collapse.all</source>
-                <target>Collapse.all</target>
+                <target>Collapse all</target>
             </trans-unit>
             <trans-unit id="92">
                 <source>Edit.message</source>
@@ -397,6 +397,26 @@
             <trans-unit id="99">
                 <source>Edit.topic</source>
                 <target>Edit topic</target>
+            </trans-unit>
+            <trans-unit id="100">
+                <source>Short.reminder</source>
+                <target>Short reminder</target>
+            </trans-unit>
+            <trans-unit id="101">
+                <source>Be.respectful.towards.others</source>
+                <target>Be respectful towards others.</target>
+            </trans-unit>
+            <trans-unit id="102">
+                <source>Personal.attack.racism.discrimination.profanity.and.impersonation.are.strictly.prohibited</source>
+                <target>Personal attack, racism, discrimination, profanity and impersonation are strictly prohibited.</target>
+            </trans-unit>
+            <trans-unit id="103">
+                <source>Spamming.and.trolling.are.prohibited</source>
+                <target>Spamming and trolling are prohibited.</target>
+            </trans-unit>
+            <trans-unit id="104">
+                <source>Pick.a.board</source>
+                <target>Pick a board</target>
             </trans-unit>
         </body>
     </file>

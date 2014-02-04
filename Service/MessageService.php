@@ -48,6 +48,20 @@ class MessageService extends BaseService
     }
 
     /**
+     * Get a collection of messages by ids
+     *
+     * @param  array  $ids
+     *
+     * @return ArrayCollection
+     */
+    public function getByIds($ids)
+    {
+        return $this->em
+                    ->getRepository($this->messageRepositoryClass)
+                    ->getByIds($ids);
+    }
+
+    /**
      * Get a collection of messages by topic
      *
      * @param  TopicInterface   $topic

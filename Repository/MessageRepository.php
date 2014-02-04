@@ -16,11 +16,13 @@ namespace Teapot\Base\ForumBundle\Repository;
 use Teapot\Base\ForumBundle\Entity\Message;
 use Teapot\Base\ForumBundle\Entity\Topic;
 
+use Teapot\Base\ForumBundle\Doctrine\Pagination\Paginator;
+
 use Teapot\Base\ForumBundle\Entity\MessageInterface;
 use Teapot\Base\ForumBundle\Entity\TopicInterface;
 
 use Doctrine\ORM\EntityRepository;
-use Teapot\Base\ForumBundle\Doctrine\Pagination\Paginator;
+use Doctrine\Common\Collections\ArrayCollection;
 
 class MessageRepository extends EntityRepository
 {
@@ -28,7 +30,7 @@ class MessageRepository extends EntityRepository
      * Get a message by id
      *
      * @param  integer  $id
-     * @param  boolean  $deleted
+     * @param  boolean  $deleted = false
      *
      * @return MessageInterface
      */
@@ -50,6 +52,30 @@ class MessageRepository extends EntityRepository
         } catch (\Doctrine\Orm\NoResultException $e) {
             return null;
         }
+    }
+
+    /**
+     * Get a collection of messages by ids
+     *
+     * @param  array    $ids
+     * @param  boolean  $isDeleted = false
+     *
+     * @return ArrayCollection
+     */
+    public function getByIds($ids, $isDeleted = false)
+    {
+        $queryBuilder = $this->createQueryBuilder('m')
+                             ->select(array('m'));
+
+        $queryBuilder->where($queryBuilder->expr()->in('m.id', $ids));
+
+        if ($isDeleted !== null) {
+            $queryBuilder->andWhere('m.isDeleted = :isDeleted')->setParameter('isDeleted', $isDeleted);
+        }
+
+        $query = $queryBuilder->getQuery();
+
+        return new ArrayCollection($query->getResult());
     }
 
     /**
