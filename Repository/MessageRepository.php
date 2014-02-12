@@ -6,20 +6,20 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  *
- * @category   Teapot
+ * @category   Teapotio
  * @package    BaseForumBundle
  * @author     Thomas Potaire
  */
 
-namespace Teapot\Base\ForumBundle\Repository;
+namespace Teapotio\Base\ForumBundle\Repository;
 
-use Teapot\Base\ForumBundle\Entity\Message;
-use Teapot\Base\ForumBundle\Entity\Topic;
+use Teapotio\Base\ForumBundle\Entity\Message;
+use Teapotio\Base\ForumBundle\Entity\Topic;
 
-use Teapot\Base\ForumBundle\Doctrine\Pagination\Paginator;
+use Teapotio\Base\ForumBundle\Doctrine\Pagination\Paginator;
 
-use Teapot\Base\ForumBundle\Entity\MessageInterface;
-use Teapot\Base\ForumBundle\Entity\TopicInterface;
+use Teapotio\Base\ForumBundle\Entity\MessageInterface;
+use Teapotio\Base\ForumBundle\Entity\TopicInterface;
 
 use Doctrine\ORM\EntityRepository;
 use Doctrine\Common\Collections\ArrayCollection;

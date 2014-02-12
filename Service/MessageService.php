@@ -6,19 +6,19 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  *
- * @category   Teapot
+ * @category   Teapotio
  * @package    BaseForumBundle
  * @author     Thomas Potaire
  */
 
-namespace Teapot\Base\ForumBundle\Service;
+namespace Teapotio\Base\ForumBundle\Service;
 
-use Teapot\Base\ForumBundle\Entity\Board;
-use Teapot\Base\ForumBundle\Entity\Topic;
-use Teapot\Base\ForumBundle\Entity\Message;
+use Teapotio\Base\ForumBundle\Entity\Board;
+use Teapotio\Base\ForumBundle\Entity\Topic;
+use Teapotio\Base\ForumBundle\Entity\Message;
 
-use Teapot\Base\ForumBundle\Entity\TopicInterface;
-use Teapot\Base\ForumBundle\Entity\MessageInterface;
+use Teapotio\Base\ForumBundle\Entity\TopicInterface;
+use Teapotio\Base\ForumBundle\Entity\MessageInterface;
 
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -120,7 +120,7 @@ class MessageService extends BaseService
         }
 
         if ($message->getTopic() === null) {
-            throw new \Teapot\Base\ForumBundle\Exception\TopicNotSetException();
+            throw new \Teapotio\Base\ForumBundle\Exception\TopicNotSetException();
         }
 
         /**
@@ -136,16 +136,16 @@ class MessageService extends BaseService
                  * Increment board message count when creating a new message
                  */
                 $this->container
-                     ->get('teapot.forum.board')
+                     ->get('teapotio.forum.board')
                      ->incrementStatPosts($message->getTopic()->getBoard());
 
                 $this->container
-                     ->get('teapot.forum.topic')
+                     ->get('teapotio.forum.topic')
                      ->incrementTotalPosts($message->getTopic());
 
                 // Get the user stat
                 $userStat = $this->container
-                                 ->get('teapot.forum.user_stat')
+                                 ->get('teapotio.forum.user_stat')
                                  ->getByUserOrCreateOne($message->getUser());
 
                 $userStat->increaseTotalMessage();
@@ -157,7 +157,7 @@ class MessageService extends BaseService
                  * Increment board topic count when creating a new topic
                  */
                 $this->container
-                     ->get('teapot.forum.board')
+                     ->get('teapotio.forum.board')
                      ->incrementStatTopics($message->getTopic()->getBoard());
             }
 
@@ -186,7 +186,7 @@ class MessageService extends BaseService
     {
         if ($message->isTopicBody() === true && $bubbleUp === true) {
             $this->container
-                 ->get('teapot.forum.topic')
+                 ->get('teapotio.forum.topic')
                  ->delete($message->getTopic());
         }
 
@@ -201,7 +201,7 @@ class MessageService extends BaseService
                      ->getUser();
 
         $this->container
-             ->get('teapot.forum.moderation')
+             ->get('teapotio.forum.moderation')
              ->delete($message, $user);
 
         return $message;
@@ -219,7 +219,7 @@ class MessageService extends BaseService
     {
         if ($message->isTopicBody() === true && $bubbleUp === true) {
             $this->container
-                 ->get('teapot.forum.topic')
+                 ->get('teapotio.forum.topic')
                  ->undelete($message->getTopic());
         }
 
@@ -234,7 +234,7 @@ class MessageService extends BaseService
                      ->getUser();
 
         $this->container
-             ->get('teapot.forum.moderation')
+             ->get('teapotio.forum.moderation')
              ->undelete($message, $user);
 
         return $message;

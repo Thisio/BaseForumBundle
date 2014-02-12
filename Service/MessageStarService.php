@@ -6,21 +6,21 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  *
- * @category   Teapot
+ * @category   Teapotio
  * @package    BaseForumBundle
  * @author     Thomas Potaire
  */
 
-namespace Teapot\Base\ForumBundle\Service;
+namespace Teapotio\Base\ForumBundle\Service;
 
-use Teapot\Base\ForumBundle\Entity\Board;
-use Teapot\Base\ForumBundle\Entity\Topic;
-use Teapot\Base\ForumBundle\Entity\Message;
-use Teapot\Base\ForumBundle\Entity\MessageStar;
+use Teapotio\Base\ForumBundle\Entity\Board;
+use Teapotio\Base\ForumBundle\Entity\Topic;
+use Teapotio\Base\ForumBundle\Entity\Message;
+use Teapotio\Base\ForumBundle\Entity\MessageStar;
 
-use Teapot\Base\ForumBundle\Entity\TopicInterface;
-use Teapot\Base\ForumBundle\Entity\MessageInterface;
-use Teapot\Base\ForumBundle\Entity\MessageStarInterface;
+use Teapotio\Base\ForumBundle\Entity\TopicInterface;
+use Teapotio\Base\ForumBundle\Entity\MessageInterface;
+use Teapotio\Base\ForumBundle\Entity\MessageStarInterface;
 
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -95,7 +95,7 @@ class MessageStarService extends BaseService
 
         if ($changed === true) {
             $message->increaseTotalStarred();
-            $this->container->get('teapot.forum.message')->save($message);
+            $this->container->get('teapotio.forum.message')->save($message);
 
             $this->save($star);
         }
@@ -126,7 +126,7 @@ class MessageStarService extends BaseService
 
             if ($changed === true) {
                 $message->decreaseTotalStarred();
-                $this->container->get('teapot.forum.message')->save($message);
+                $this->container->get('teapotio.forum.message')->save($message);
 
                 $this->save($star);
             }

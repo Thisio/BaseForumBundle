@@ -6,18 +6,18 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  *
- * @category   Teapot
+ * @category   Teapotio
  * @package    BaseForumBundle
  * @author     Thomas Potaire
  */
 
-namespace Teapot\Base\ForumBundle\Service;
+namespace Teapotio\Base\ForumBundle\Service;
 
-use Teapot\Base\ForumBundle\Entity\Board;
-use Teapot\Base\ForumBundle\Entity\Topic;
-use Teapot\Base\ForumBundle\Entity\Message;
+use Teapotio\Base\ForumBundle\Entity\Board;
+use Teapotio\Base\ForumBundle\Entity\Topic;
+use Teapotio\Base\ForumBundle\Entity\Message;
 
-use Teapot\Base\ForumBundle\Entity\BoardInterface;
+use Teapotio\Base\ForumBundle\Entity\BoardInterface;
 
 use Doctrine\Common\Collections\ArrayCollection;
 
@@ -72,11 +72,11 @@ class BoardService extends BaseService
     public function getViewableAndRestrictedBoardIds()
     {
         $viewableBoards = $this->container
-                               ->get('teapot.forum.board')
+                               ->get('teapotio.forum.board')
                                ->getViewableBoards();
 
         $restrictedBoards = $this->container
-                               ->get('teapot.forum.board')
+                               ->get('teapotio.forum.board')
                                ->getRestrictedBoards();
 
         $viewableBoardIds = array();
@@ -197,7 +197,7 @@ class BoardService extends BaseService
             $board = $row[0];
             $parentId = $row[1];
 
-            if ($this->container->get('teapot.forum.access_permission')->canView($user, $board) === false) {
+            if ($this->container->get('teapotio.forum.access_permission')->canView($user, $board) === false) {
                 $this->restrictedBoards->add($board);
                 continue;
             }
@@ -335,21 +335,21 @@ class BoardService extends BaseService
      *
      * @param  BoardInterface  $board
      *
-     * @throws \Teapot\Base\ForumBundle\Exception\TopicExistsException
-     * @throws \Teapot\Base\ForumBundle\Exception\BoardExistsException
+     * @throws \Teapotio\Base\ForumBundle\Exception\TopicExistsException
+     * @throws \Teapotio\Base\ForumBundle\Exception\BoardExistsException
      */
     public function delete(BoardInterface $board)
     {
         $boards = $this->getBoardsByParentBoard($board);
 
         if ($boards->count() !== 0) {
-            throw new \Teapot\Base\ForumBundle\Exception\BoardExistsException();
+            throw new \Teapotio\Base\ForumBundle\Exception\BoardExistsException();
         }
 
-        $topics = $this->container->get('teapot.forum.topic')->getLatestTopicsByBoard($board, 0, 1);
+        $topics = $this->container->get('teapotio.forum.topic')->getLatestTopicsByBoard($board, 0, 1);
 
         if ($topics->count() !== 0) {
-            throw new \Teapot\Base\ForumBundle\Exception\TopicExistsException();
+            throw new \Teapotio\Base\ForumBundle\Exception\TopicExistsException();
         }
 
         $this->em->remove($board);
@@ -480,12 +480,12 @@ class BoardService extends BaseService
      * @param  BoardInterface  $original
      * @param  BoardInterface  $destination
      *
-     * @throws \Teapot\Base\ForumBundle\Exception\InvalidBoardException
+     * @throws \Teapotio\Base\ForumBundle\Exception\InvalidBoardException
      */
     public function moveContent(BoardInterface $original, BoardInterface $destination)
     {
         if ($original->getId() === $destination->getId()) {
-            throw new \Teapot\Base\ForumBundle\Exception\InvalidBoardException();
+            throw new \Teapotio\Base\ForumBundle\Exception\InvalidBoardException();
         }
 
         $posts = $original->getTotalPosts();
@@ -495,7 +495,7 @@ class BoardService extends BaseService
         $board = $destination->getParent();
         while ($board !== null) {
             if ($board->getId() === $original->getId()) {
-                throw new \Teapot\Base\ForumBundle\Exception\InvalidBoardException();
+                throw new \Teapotio\Base\ForumBundle\Exception\InvalidBoardException();
             }
             $board = $board->getParent();
         }
@@ -511,7 +511,7 @@ class BoardService extends BaseService
 
         // Move topics
         $this->container
-             ->get('teapot.forum.topic')
+             ->get('teapotio.forum.topic')
              ->moveFromBoardToBoard($original, $destination);
 
         // Move boards

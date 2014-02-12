@@ -6,21 +6,21 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  *
- * @category   Teapot
+ * @category   Teapotio
  * @package    BaseForumBundle
  * @author     Thomas Potaire
  */
 
-namespace Teapot\Base\ForumBundle\Service;
+namespace Teapotio\Base\ForumBundle\Service;
 
-use Teapot\Base\ForumBundle\Entity\Board;
-use Teapot\Base\ForumBundle\Entity\Topic;
-use Teapot\Base\ForumBundle\Entity\Message;
-use Teapot\Base\ForumBundle\Entity\Flag;
-use Teapot\Base\ForumBundle\Entity\Moderation;
+use Teapotio\Base\ForumBundle\Entity\Board;
+use Teapotio\Base\ForumBundle\Entity\Topic;
+use Teapotio\Base\ForumBundle\Entity\Message;
+use Teapotio\Base\ForumBundle\Entity\Flag;
+use Teapotio\Base\ForumBundle\Entity\Moderation;
 
-use Teapot\Base\ForumBundle\Entity\TopicInterface;
-use Teapot\Base\ForumBundle\Entity\ModerationInterface;
+use Teapotio\Base\ForumBundle\Entity\TopicInterface;
+use Teapotio\Base\ForumBundle\Entity\ModerationInterface;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Tools\Pagination\Paginator;
@@ -66,7 +66,7 @@ class ModerationService extends BaseService
             throw new \InvalidArgumentException('Entity should be either a Board entity, a Topic entity or a Message entity.');
         }
 
-        if ($this->container->get('teapot.forum.access_permission')->canDelete($user, $entity) === false) {
+        if ($this->container->get('teapotio.forum.access_permission')->canDelete($user, $entity) === false) {
             return false;
         }
 
@@ -80,12 +80,12 @@ class ModerationService extends BaseService
 
         if (true === $entity instanceof Topic) {
             $moderation->setTopic($entity);
-            $flag = $this->container->get('teapot.forum.flag')->getByTopic($entity);
+            $flag = $this->container->get('teapotio.forum.flag')->getByTopic($entity);
         }
 
         if (true === $entity instanceof Message) {
             $moderation->setMessage($entity);
-            $flag = $this->container->get('teapot.forum.flag')->getByMessage($entity);
+            $flag = $this->container->get('teapotio.forum.flag')->getByMessage($entity);
         }
 
         $this->save($moderation);
@@ -93,7 +93,7 @@ class ModerationService extends BaseService
         // If the item is currently flagged and the flag hasn't been moderated
         if ($flag !== null && $flag->setModeration() === null) {
             $flag->setModeration($moderation);
-            $this->container->get('teapot.forum.flag')->save($flag);
+            $this->container->get('teapotio.forum.flag')->save($flag);
         }
 
         return $moderation;
@@ -115,7 +115,7 @@ class ModerationService extends BaseService
             throw new \InvalidArgumentException('Entity should be either a Board entity, a Topic entity or a Message entity.');
         }
 
-        if ($this->container->get('teapot.forum.access_permission')->canUndelete($user, $entity) === false) {
+        if ($this->container->get('teapotio.forum.access_permission')->canUndelete($user, $entity) === false) {
             return false;
         }
 

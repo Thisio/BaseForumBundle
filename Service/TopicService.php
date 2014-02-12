@@ -6,19 +6,19 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  *
- * @category   Teapot
+ * @category   Teapotio
  * @package    BaseForumBundle
  * @author     Thomas Potaire
  */
 
-namespace Teapot\Base\ForumBundle\Service;
+namespace Teapotio\Base\ForumBundle\Service;
 
-use Teapot\Base\ForumBundle\Entity\Board;
-use Teapot\Base\ForumBundle\Entity\Topic;
-use Teapot\Base\ForumBundle\Entity\Message;
+use Teapotio\Base\ForumBundle\Entity\Board;
+use Teapotio\Base\ForumBundle\Entity\Topic;
+use Teapotio\Base\ForumBundle\Entity\Message;
 
-use Teapot\Base\ForumBundle\Entity\BoardInterface;
-use Teapot\Base\ForumBundle\Entity\TopicInterface;
+use Teapotio\Base\ForumBundle\Entity\BoardInterface;
+use Teapotio\Base\ForumBundle\Entity\TopicInterface;
 
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -86,7 +86,7 @@ class TopicService extends BaseService
     public function getLatestTopics($offset, $limit)
     {
         list($viewableBoardIds, $restrictedBoardIds) = $this->container
-                                                            ->get('teapot.forum.board')
+                                                            ->get('teapotio.forum.board')
                                                             ->getViewableAndRestrictedBoardIds();
 
         return $this->em
@@ -138,7 +138,7 @@ class TopicService extends BaseService
     public function getLatestTopicsByUser(UserInterface $user, $offset, $limit)
     {
         list($viewableBoardIds, $restrictedBoardIds) = $this->container
-                                                            ->get('teapot.forum.board')
+                                                            ->get('teapotio.forum.board')
                                                             ->getViewableAndRestrictedBoardIds();
 
         return $this->em
@@ -195,7 +195,7 @@ class TopicService extends BaseService
 
         // If no board has been selected, throw an exception
         if ($topic->getBoard() === null) {
-            throw new \Teapot\Base\ForumBundle\Exception\BoardNotSetException();
+            throw new \Teapotio\Base\ForumBundle\Exception\BoardNotSetException();
         }
 
         // If the topic doesn't have stat
@@ -209,7 +209,7 @@ class TopicService extends BaseService
 
             // Get the user stat
             $userStat = $this->container
-                             ->get('teapot.forum.user_stat')
+                             ->get('teapotio.forum.user_stat')
                              ->getByUserOrCreateOne($topic->getUser(), false);
 
             $userStat->increaseTotalTopic();
@@ -239,12 +239,12 @@ class TopicService extends BaseService
 
         if ($bubbleDown === true) {
             $message = $this->container
-                            ->get('teapot.forum.message')
+                            ->get('teapotio.forum.message')
                             ->getTopicBodyByTopic($topic);
 
             if ($message !== null) {
                 $this->container
-                     ->get('teapot.forum.message')
+                     ->get('teapotio.forum.message')
                      ->delete($message, false);
             }
         }
@@ -258,7 +258,7 @@ class TopicService extends BaseService
                      ->getUser();
 
         $this->container
-             ->get('teapot.forum.moderation')
+             ->get('teapotio.forum.moderation')
              ->delete($topic, $user);
 
         return $topic;
@@ -278,12 +278,12 @@ class TopicService extends BaseService
 
         if ($bubbleDown === true) {
             $message = $this->container
-                            ->get('teapot.forum.message')
+                            ->get('teapotio.forum.message')
                             ->getTopicBodyByTopic($topic);
 
             if ($message !== null) {
                 $this->container
-                     ->get('teapot.forum.message')
+                     ->get('teapotio.forum.message')
                      ->undelete($message, false);
             }
         }
@@ -297,7 +297,7 @@ class TopicService extends BaseService
                      ->getUser();
 
         $this->container
-             ->get('teapot.forum.moderation')
+             ->get('teapotio.forum.moderation')
              ->undelete($topic, $user);
 
         return $topic;
@@ -322,7 +322,7 @@ class TopicService extends BaseService
                      ->getUser();
 
         $this->container
-             ->get('teapot.forum.moderation')
+             ->get('teapotio.forum.moderation')
              ->unpin($topic, $user);
 
         return $topic;
@@ -347,7 +347,7 @@ class TopicService extends BaseService
                      ->getUser();
 
         $this->container
-             ->get('teapot.forum.moderation')
+             ->get('teapotio.forum.moderation')
              ->unpin($topic, $user);
 
         return $topic;
@@ -372,7 +372,7 @@ class TopicService extends BaseService
                      ->getUser();
 
         $this->container
-             ->get('teapot.forum.moderation')
+             ->get('teapotio.forum.moderation')
              ->lock($topic, $user);
 
         return $topic;
@@ -397,7 +397,7 @@ class TopicService extends BaseService
                      ->getUser();
 
         $this->container
-             ->get('teapot.forum.moderation')
+             ->get('teapotio.forum.moderation')
              ->unlock($topic, $user);
 
         return $topic;

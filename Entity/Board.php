@@ -6,12 +6,12 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  *
- * @category   Teapot
+ * @category   Teapotio
  * @package    BaseForumBundle
  * @author     Thomas Potaire
  */
 
-namespace Teapot\Base\ForumBundle\Entity;
+namespace Teapotio\Base\ForumBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -20,7 +20,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\Role\RoleInterface;
 
 /**
- * Teapot\Base\ForumBundle\Entity\Board
+ * Teapotio\Base\ForumBundle\Entity\Board
  *
  * @ORM\MappedSuperclass
  */
@@ -145,7 +145,7 @@ class Board implements BoardInterface
     protected $children;
 
     /**
-     * @var \Teapot\Base\ForumBundle\Entity\Board $parent
+     * @var \Teapotio\Base\ForumBundle\Entity\Board $parent
      */
     protected $parent;
 
@@ -155,7 +155,7 @@ class Board implements BoardInterface
     protected $user;
 
     /**
-     * @var \Teapot\Base\ForumBundle\Entity\BoardStat $stat
+     * @var \Teapotio\Base\ForumBundle\Entity\BoardStat $stat
      */
     protected $stat;
 
@@ -627,10 +627,10 @@ class Board implements BoardInterface
     /**
      * Set board
      *
-     * @param \Teapot\Base\ForumBundle\Entity\Board $parent
+     * @param \Teapotio\Base\ForumBundle\Entity\Board $parent
      * @return Board
      */
-    public function setParent(\Teapot\Base\ForumBundle\Entity\Board $parent = null)
+    public function setParent(\Teapotio\Base\ForumBundle\Entity\Board $parent = null)
     {
         $this->parent = $parent;
 
@@ -640,7 +640,7 @@ class Board implements BoardInterface
     /**
      * Get board
      *
-     * @return \Teapot\Base\ForumBundle\Entity\Board
+     * @return \Teapotio\Base\ForumBundle\Entity\Board
      */
     public function getParent()
     {

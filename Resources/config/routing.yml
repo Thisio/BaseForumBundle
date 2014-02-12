@@ -1,27 +1,27 @@
-TeapotBaseForumBundle_listMessages:
+TeapotioBaseForumBundle_listMessages:
     pattern:  /list-messages/{topicId}/
-    defaults: { _controller: TeapotBaseForumBundle:Module:listMessages }
+    defaults: { _controller: TeapotioBaseForumBundle:Module:listMessages }
 
-TeapotBaseForumBundle_listTopics:
+TeapotioBaseForumBundle_listTopics:
     pattern:  /list-topics/
-    defaults: { _controller: TeapotBaseForumBundle:Module:listTopics }
+    defaults: { _controller: TeapotioBaseForumBundle:Module:listTopics }
 
-TeapotBaseForumBundle_listTopicsInBoard:
+TeapotioBaseForumBundle_listTopicsInBoard:
     pattern:  /list-topics/{boardId}/
-    defaults: { _controller: TeapotBaseForumBundle:Module:listTopics }
+    defaults: { _controller: TeapotioBaseForumBundle:Module:listTopics }
 
-TeapotBaseForumBundle_listBoards:
+TeapotioBaseForumBundle_listBoards:
     pattern:  /list-boards/
-    defaults: { _controller: TeapotBaseForumBundle:Module:listBoards }
+    defaults: { _controller: TeapotioBaseForumBundle:Module:listBoards }
 
-TeapotBaseForumBundle_newMessage:
+TeapotioBaseForumBundle_newMessage:
     pattern:  /new-message/{topicId}/
-    defaults: { _controller: TeapotBaseForumBundle:Module:newMessage }
+    defaults: { _controller: TeapotioBaseForumBundle:Module:newMessage }
 
-TeapotBaseForumBundle_newTopic:
+TeapotioBaseForumBundle_newTopic:
     pattern:  /new-topic/{boardId}/
-    defaults: { _controller: TeapotBaseForumBundle:Module:newTopic }
+    defaults: { _controller: TeapotioBaseForumBundle:Module:newTopic }
 
-TeapotBaseForumBundle_newBoard:
+TeapotioBaseForumBundle_newBoard:
     pattern:  /new-board/
-    defaults: { _controller: TeapotBaseForumBundle:Module:newBoard }
+    defaults: { _controller: TeapotioBaseForumBundle:Module:newBoard }

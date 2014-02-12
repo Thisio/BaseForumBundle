@@ -6,18 +6,18 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  *
- * @category   Teapot
+ * @category   Teapotio
  * @package    BaseForumBundle
  * @author     Thomas Potaire
  */
 
-namespace Teapot\Base\ForumBundle\Entity;
+namespace Teapotio\Base\ForumBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
- * Teapot\Base\ForumBundle\Entity\Message
+ * Teapotio\Base\ForumBundle\Entity\Message
  *
  * @ORM\MappedSuperclass
  */
@@ -87,7 +87,7 @@ class Message implements MessageInterface
     protected $user;
 
     /**
-     * @var \Teapot\Base\ForumBundle\Entity\Topic $topic
+     * @var \Teapotio\Base\ForumBundle\Entity\Topic $topic
      */
     protected $topic;
 
@@ -329,10 +329,10 @@ class Message implements MessageInterface
     /**
      * Set topic
      *
-     * @param \Teapot\Base\ForumBundle\Entity\Topic $topic
+     * @param \Teapotio\Base\ForumBundle\Entity\Topic $topic
      * @return Message
      */
-    public function setTopic(\Teapot\Base\ForumBundle\Entity\Topic $topic)
+    public function setTopic(\Teapotio\Base\ForumBundle\Entity\Topic $topic)
     {
         $this->topic = $topic;
 
@@ -342,7 +342,7 @@ class Message implements MessageInterface
     /**
      * Get topic
      *
-     * @return \Teapot\Base\ForumBundle\Entity\Topic
+     * @return \Teapotio\Base\ForumBundle\Entity\Topic
      */
     public function getTopic()
     {

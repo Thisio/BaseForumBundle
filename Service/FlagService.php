@@ -6,22 +6,22 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  *
- * @category   Teapot
+ * @category   Teapotio
  * @package    BaseForumBundle
  * @author     Thomas Potaire
  */
 
-namespace Teapot\Base\ForumBundle\Service;
+namespace Teapotio\Base\ForumBundle\Service;
 
-use Teapot\Base\ForumBundle\Entity\Board;
-use Teapot\Base\ForumBundle\Entity\Topic;
-use Teapot\Base\ForumBundle\Entity\Message;
-use Teapot\Base\ForumBundle\Entity\Flag;
-use Teapot\Base\ForumBundle\Entity\Moderation;
+use Teapotio\Base\ForumBundle\Entity\Board;
+use Teapotio\Base\ForumBundle\Entity\Topic;
+use Teapotio\Base\ForumBundle\Entity\Message;
+use Teapotio\Base\ForumBundle\Entity\Flag;
+use Teapotio\Base\ForumBundle\Entity\Moderation;
 
-use Teapot\Base\ForumBundle\Entity\MessageInterface;
-use Teapot\Base\ForumBundle\Entity\TopicInterface;
-use Teapot\Base\ForumBundle\Entity\FlagInterface;
+use Teapotio\Base\ForumBundle\Entity\MessageInterface;
+use Teapotio\Base\ForumBundle\Entity\TopicInterface;
+use Teapotio\Base\ForumBundle\Entity\FlagInterface;
 
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -133,7 +133,7 @@ class FlagService extends BaseService
         $flag->setIsDeleted(true);
 
         $moderation = $this->container
-                           ->get('teapot.forum.moderation')
+                           ->get('teapotio.forum.moderation')
                            ->delete($flag->getFlaggedItem(), $user);
 
         $flag->setModeration($moderation);
@@ -212,7 +212,7 @@ class FlagService extends BaseService
                          ->getToken()
                          ->getUser();
 
-            if ($this->container->get('teapot.forum.access_permission')->isModerator($user, $board) === false) {
+            if ($this->container->get('teapotio.forum.access_permission')->isModerator($user, $board) === false) {
                 return $flags;
             }
         }

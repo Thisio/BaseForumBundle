@@ -6,15 +6,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  *
- * @category   Teapot
+ * @category   Teapotio
  * @package    BaseForumBundle
  * @author     Thomas Potaire
  */
 
-namespace Teapot\Base\ForumBundle\Service;
+namespace Teapotio\Base\ForumBundle\Service;
 
-use Teapot\Base\ForumBundle\Entity\BoardInterface;
-use Teapot\Base\ForumBundle\Entity\TopicInterface;
+use Teapotio\Base\ForumBundle\Entity\BoardInterface;
+use Teapotio\Base\ForumBundle\Entity\TopicInterface;
 
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -56,10 +56,10 @@ class PathService extends BaseService
      */
     public function getBoardParameters(BoardInterface $board)
     {
-        $useId = $this->container->getParameter('teapot.forum.url.use_id');
+        $useId = $this->container->getParameter('teapotio.forum.url.use_id');
 
         $parameters = array(
-            'boardSlug' => $this->container->get('teapot.forum.board')->buildSlug($board)
+            'boardSlug' => $this->container->get('teapotio.forum.board')->buildSlug($board)
         );
 
         if ($useId === true) {
@@ -76,7 +76,7 @@ class PathService extends BaseService
      */
     public function lookupBoard()
     {
-        $useId = $this->container->getParameter('teapot.forum.url.use_id');
+        $useId = $this->container->getParameter('teapotio.forum.url.use_id');
 
         // if the URL uses IDs
         if ($useId === true) {
@@ -96,7 +96,7 @@ class PathService extends BaseService
     {
         $boardId = $this->container->get('request')->attributes->get('boardId');
 
-        return $board = $this->container->get('teapot.forum.board')->getById($boardId);
+        return $board = $this->container->get('teapotio.forum.board')->getById($boardId);
     }
 
     /**
@@ -106,7 +106,7 @@ class PathService extends BaseService
      */
     protected function lookupBoardBySlug()
     {
-        $boards = $this->container->get('teapot.forum.board')->getBoards();
+        $boards = $this->container->get('teapotio.forum.board')->getBoards();
 
         // the whole slug in the URL (including the hierarchy)
         $wholeSlug = $this->container->get('request')->attributes->get('boardSlug');
@@ -169,7 +169,7 @@ class PathService extends BaseService
         $board->setSlug();
 
         if ($board->getParent() === null) {
-            $boards = $this->container->get('teapot.forum.board')->getBoards();
+            $boards = $this->container->get('teapotio.forum.board')->getBoards();
         } else {
             $boards = $board->getParent()->getChildren();
         }
@@ -250,7 +250,7 @@ class PathService extends BaseService
      */
     public function getTopicParameters(TopicInterface $topic)
     {
-        $useId = $this->container->getParameter('teapot.forum.url.use_id');
+        $useId = $this->container->getParameter('teapotio.forum.url.use_id');
 
         $parameters = array(
             'topicSlug' => $topic->getSlug()

@@ -6,16 +6,16 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  *
- * @category   Teapot
+ * @category   Teapotio
  * @package    BaseForumBundle
  * @author     Thomas Potaire
  */
 
-namespace Teapot\Base\ForumBundle\Extension;
+namespace Teapotio\Base\ForumBundle\Extension;
 
-use Teapot\Base\ForumBundle\Entity\BoardInterface;
-use Teapot\Base\ForumBundle\Entity\TopicInterface;
-use Teapot\Base\ForumBundle\Entity\MessageInterface;
+use Teapotio\Base\ForumBundle\Entity\BoardInterface;
+use Teapotio\Base\ForumBundle\Entity\TopicInterface;
+use Teapotio\Base\ForumBundle\Entity\MessageInterface;
 
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -44,17 +44,17 @@ class DataAccess extends \Twig_Extension {
 
     public function getBoards($deleted = false, $parentFirst = false)
     {
-        return $this->container->get('teapot.forum.board')->getBoards($deleted, $parentFirst);
+        return $this->container->get('teapotio.forum.board')->getBoards($deleted, $parentFirst);
     }
 
     public function getTopUsers($limit = 10)
     {
-        return $this->container->get('teapot.forum.user_stat')->getTopUsers($limit);
+        return $this->container->get('teapotio.forum.user_stat')->getTopUsers($limit);
     }
 
     public function getLatestModerations($limit = 15)
     {
-        return $this->container->get('teapot.forum.moderation')->getLatestModerations(0, $limit);
+        return $this->container->get('teapotio.forum.moderation')->getLatestModerations(0, $limit);
     }
 
     public function getLastPage($totalMessages, $messagePerPage)
@@ -64,7 +64,7 @@ class DataAccess extends \Twig_Extension {
 
     public function getLatestFlags($limit = 15)
     {
-        return $this->container->get('teapot.forum.flag')->getLatestFlags(0, $limit);
+        return $this->container->get('teapotio.forum.flag')->getLatestFlags(0, $limit);
     }
 
     public function isMessageStarred($message)
@@ -80,7 +80,7 @@ class DataAccess extends \Twig_Extension {
 
     public function isMessageStarredByUser($message, $user)
     {
-        return $this->container->get('teapot.forum.message_star')->isMessageStarredByUser($message, $user);
+        return $this->container->get('teapotio.forum.message_star')->isMessageStarredByUser($message, $user);
     }
 
     public function getName()

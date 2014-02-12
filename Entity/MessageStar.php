@@ -6,17 +6,17 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  *
- * @category   Teapot
+ * @category   Teapotio
  * @package    BaseForumBundle
  * @author     Thomas Potaire
  */
 
-namespace Teapot\Base\ForumBundle\Entity;
+namespace Teapotio\Base\ForumBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Teapot\Base\ForumBundle\Entity\MessageStar
+ * Teapotio\Base\ForumBundle\Entity\MessageStar
  *
  * @ORM\MappedSuperclass
  */
@@ -44,7 +44,7 @@ class MessageStar implements MessageStarInterface
     protected $user;
 
     /**
-     * @var \Teapot\Base\ForumBundle\Entity\Message $message
+     * @var \Teapotio\Base\ForumBundle\Entity\Message $message
      */
     protected $message;
 
@@ -107,11 +107,11 @@ class MessageStar implements MessageStarInterface
     /**
      * Set message
      *
-     * @param \Teapot\Base\ForumBundle\Entity\Message $message
+     * @param \Teapotio\Base\ForumBundle\Entity\Message $message
      *
      * @return MessageStar
      */
-    public function setMessage(\Teapot\Base\ForumBundle\Entity\Message $message)
+    public function setMessage(\Teapotio\Base\ForumBundle\Entity\Message $message)
     {
         $this->message = $message;
 
@@ -121,7 +121,7 @@ class MessageStar implements MessageStarInterface
     /**
      * Get message
      *
-     * @return \Teapot\Base\ForumBundle\Entity\Message
+     * @return \Teapotio\Base\ForumBundle\Entity\Message
      */
     public function getMessage()
     {

@@ -8,21 +8,21 @@
  * installation.
  * Example in app/config/routing_dev.yml
  *
- * TeapotBaseForumBundle:
- *     resource: "@TeapotBaseForumBundle/Resources/config/routing.yml"
+ * TeapotioBaseForumBundle:
+ *     resource: "@TeapotioBaseForumBundle/Resources/config/routing.yml"
  *     prefix:   /forum-test
  */
 
-namespace Teapot\Base\ForumBundle\Controller;
+namespace Teapotio\Base\ForumBundle\Controller;
 
-use Teapot\Base\ForumBundle\Entity\Board;
-use Teapot\Base\ForumBundle\Form\CreateBoardType;
+use Teapotio\Base\ForumBundle\Entity\Board;
+use Teapotio\Base\ForumBundle\Form\CreateBoardType;
 
-use Teapot\Base\ForumBundle\Entity\Topic;
-use Teapot\Base\ForumBundle\Form\CreateTopicType;
+use Teapotio\Base\ForumBundle\Entity\Topic;
+use Teapotio\Base\ForumBundle\Form\CreateTopicType;
 
-use Teapot\Base\ForumBundle\Entity\Message;
-use Teapot\Base\ForumBundle\Form\CreateMessageType;
+use Teapotio\Base\ForumBundle\Entity\Message;
+use Teapotio\Base\ForumBundle\Form\CreateMessageType;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
@@ -34,19 +34,19 @@ class ModuleController extends Controller
         $em = $this->get('doctrine')->getManager();
 
         if ($boardId === null) {
-            $topics = $this->get('teapot.forum.topic')->getLatestTopics(0, 10);
+            $topics = $this->get('teapotio.forum.topic')->getLatestTopics(0, 10);
         }
         else {
-            $board = $em->getRepository($this->getParameter('teapot_forum.board_repository.class'))->find($boardId);
+            $board = $em->getRepository($this->getParameter('teapotio_forum.board_repository.class'))->find($boardId);
 
             if (!$board instanceof Board) {
                 throw $this->createNotFoundException("No Board Found");
             }
 
-            $topics = $this->get('teapot.forum.topic')->getLatestTopicsByBoard($board, 0, 10);
+            $topics = $this->get('teapotio.forum.topic')->getLatestTopicsByBoard($board, 0, 10);
         }
 
-        return $this->render('TeapotBaseForumBundle:Module:listTopics.html.twig', array(
+        return $this->render('TeapotioBaseForumBundle:Module:listTopics.html.twig', array(
             'topics' => $topics
         ));
     }
@@ -55,7 +55,7 @@ class ModuleController extends Controller
     {
         $em = $this->get('doctrine')->getManager();
 
-        return $this->render('TeapotBaseForumBundle:Module:listBoards.html.twig', array(
+        return $this->render('TeapotioBaseForumBundle:Module:listBoards.html.twig', array(
         ));
     }
 
@@ -63,15 +63,15 @@ class ModuleController extends Controller
     {
         $em = $this->get('doctrine')->getManager();
 
-        $topic = $em->getRepository($this->getParameter('teapot_forum.topic_repository.class'))->find($topicId);
+        $topic = $em->getRepository($this->getParameter('teapotio_forum.topic_repository.class'))->find($topicId);
 
         if (!$topic instanceof Topic) {
             throw $this->createNotFoundException("No Topic Found");
         }
 
-        $messages = $this->get('teapot.forum.message')->getLatestMessagesByTopic($topic, 0, 10);
+        $messages = $this->get('teapotio.forum.message')->getLatestMessagesByTopic($topic, 0, 10);
 
-        return $this->render('TeapotBaseForumBundle:Module:listMessages.html.twig', array(
+        return $this->render('TeapotioBaseForumBundle:Module:listMessages.html.twig', array(
             'messages' => $messages
         ));
     }
@@ -84,7 +84,7 @@ class ModuleController extends Controller
 
         $em = $this->get('doctrine')->getManager();
 
-        $topic = $em->getRepository($this->getParameter('teapot_forum.topic_repository.class'))->find($topicId);
+        $topic = $em->getRepository($this->getParameter('teapotio_forum.topic_repository.class'))->find($topicId);
 
         if (!$topic instanceof Topic) {
             throw $this->createNotFoundException("No Topic Found");
@@ -100,11 +100,11 @@ class ModuleController extends Controller
             $form->bind($request);
             if ($form->isValid() === true) {
                 $message->setTopic($topic);
-                $this->get('teapot.forum.message')->save($message);
+                $this->get('teapotio.forum.message')->save($message);
             }
         }
 
-        return $this->render('TeapotBaseForumBundle:Module:newMessage.html.twig', array(
+        return $this->render('TeapotioBaseForumBundle:Module:newMessage.html.twig', array(
             'form' => $form->createView()
         ));
     }
@@ -117,7 +117,7 @@ class ModuleController extends Controller
 
         $em = $this->get('doctrine')->getManager();
 
-        $board = $em->getRepository($this->getParameter('teapot_forum.board_repository.class'))->find($boardId);
+        $board = $em->getRepository($this->getParameter('teapotio_forum.board_repository.class'))->find($boardId);
 
         if (!$board instanceof Board) {
             throw $this->createNotFoundException("No Board Found");
@@ -136,18 +136,18 @@ class ModuleController extends Controller
 
                 $topic->setBoard($board);
 
-                $this->get('teapot.forum.topic')->save($topic);
+                $this->get('teapotio.forum.topic')->save($topic);
 
                 $message = new Message();
 
                 $message->setBody($form['body']->getData());
                 $message->setTopic($topic);
 
-                $this->get('teapot.forum.message')->save($message);
+                $this->get('teapotio.forum.message')->save($message);
             }
         }
 
-        return $this->render('TeapotBaseForumBundle:Module:newTopic.html.twig', array(
+        return $this->render('TeapotioBaseForumBundle:Module:newTopic.html.twig', array(
             'form' => $form->createView()
         ));
     }
@@ -167,11 +167,11 @@ class ModuleController extends Controller
         if ($request->getMethod() === 'POST') {
             $form->bind($request);
             if ($form->isValid() === true) {
-                $this->get('teapot.forum.board')->save($board);
+                $this->get('teapotio.forum.board')->save($board);
             }
         }
 
-        return $this->render('TeapotBaseForumBundle:Module:newBoard.html.twig', array(
+        return $this->render('TeapotioBaseForumBundle:Module:newBoard.html.twig', array(
             'form' => $form->createView()
         ));
     }

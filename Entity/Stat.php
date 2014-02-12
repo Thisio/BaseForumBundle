@@ -6,17 +6,17 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  *
- * @category   Teapot
+ * @category   Teapotio
  * @package    BaseForumBundle
  * @author     Thomas Potaire
  */
 
-namespace Teapot\Base\ForumBundle\Entity;
+namespace Teapotio\Base\ForumBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Teapot\Base\ForumBundle\Entity\Stat
+ * Teapotio\Base\ForumBundle\Entity\Stat
  *
  * @ORM\MappedSuperclass
  */

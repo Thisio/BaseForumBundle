@@ -6,18 +6,18 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  *
- * @category   Teapot
+ * @category   Teapotio
  * @package    BaseForumBundle
  * @author     Thomas Potaire
  */
 
-namespace Teapot\Base\ForumBundle\Entity;
+namespace Teapotio\Base\ForumBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
- * Teapot\Base\ForumBundle\Entity\Topic
+ * Teapotio\Base\ForumBundle\Entity\Topic
  *
  * @ORM\MappedSuperclass
  */
@@ -108,12 +108,12 @@ class Topic implements TopicInterface
     protected $user;
 
     /**
-     * @var \Teapot\Base\ForumBundle\Entity\TopicStat $stat
+     * @var \Teapotio\Base\ForumBundle\Entity\TopicStat $stat
      */
     protected $stat;
 
     /**
-     * @var \Teapot\Base\ForumBundle\Entity\Board $board
+     * @var \Teapotio\Base\ForumBundle\Entity\Board $board
      */
     protected $board;
 
@@ -470,10 +470,10 @@ class Topic implements TopicInterface
     /**
      * Set board
      *
-     * @param \Teapot\Base\ForumBundle\Entity\Board $board
+     * @param \Teapotio\Base\ForumBundle\Entity\Board $board
      * @return Topic
      */
-    public function setBoard(\Teapot\Base\ForumBundle\Entity\Board $board)
+    public function setBoard(\Teapotio\Base\ForumBundle\Entity\Board $board)
     {
         $this->board = $board;
 
@@ -483,7 +483,7 @@ class Topic implements TopicInterface
     /**
      * Get board
      *
-     * @return \Teapot\Base\ForumBundle\Entity\Board
+     * @return \Teapotio\Base\ForumBundle\Entity\Board
      */
     public function getBoard()
     {

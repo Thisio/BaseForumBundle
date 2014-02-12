@@ -6,12 +6,12 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  *
- * @category   Teapot
+ * @category   Teapotio
  * @package    BaseForumBundle
  * @author     Thomas Potaire
  */
 
-namespace Teapot\Base\ForumBundle\Entity;
+namespace Teapotio\Base\ForumBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -59,17 +59,17 @@ class Flag implements FlagInterface
     protected $users;
 
     /**
-     * @var \Teapot\Base\ForumBundle\Entity\Topic $topic
+     * @var \Teapotio\Base\ForumBundle\Entity\Topic $topic
      */
     protected $topic;
 
     /**
-     * @var \Teapot\Base\ForumBundle\Entity\Message $message
+     * @var \Teapotio\Base\ForumBundle\Entity\Message $message
      */
     protected $message;
 
     /**
-     * @var \Teapot\Base\ForumBundle\Entity\Moderation $moderation
+     * @var \Teapotio\Base\ForumBundle\Entity\Moderation $moderation
      */
     protected $moderation;
 
@@ -198,11 +198,11 @@ class Flag implements FlagInterface
     /**
      * Set message
      *
-     * @param \Teapot\Base\ForumBundle\Entity\Message $message
+     * @param \Teapotio\Base\ForumBundle\Entity\Message $message
      *
      * @return Flag
      */
-    public function setMessage(\Teapot\Base\ForumBundle\Entity\Message $message)
+    public function setMessage(\Teapotio\Base\ForumBundle\Entity\Message $message)
     {
         $this->message = $message;
 
@@ -212,7 +212,7 @@ class Flag implements FlagInterface
     /**
      * Get message
      *
-     * @return \Teapot\Base\ForumBundle\Entity\Message
+     * @return \Teapotio\Base\ForumBundle\Entity\Message
      */
     public function getMessage()
     {
@@ -222,11 +222,11 @@ class Flag implements FlagInterface
     /**
      * Set topic
      *
-     * @param \Teapot\Base\ForumBundle\Entity\Topic $topic
+     * @param \Teapotio\Base\ForumBundle\Entity\Topic $topic
      *
      * @return Flag
      */
-    public function setTopic(\Teapot\Base\ForumBundle\Entity\Topic $topic)
+    public function setTopic(\Teapotio\Base\ForumBundle\Entity\Topic $topic)
     {
         $this->topic = $topic;
 
@@ -236,7 +236,7 @@ class Flag implements FlagInterface
     /**
      * Get topic
      *
-     * @return \Teapot\Base\ForumBundle\Entity\Topic
+     * @return \Teapotio\Base\ForumBundle\Entity\Topic
      */
     public function getTopic()
     {
@@ -246,11 +246,11 @@ class Flag implements FlagInterface
     /**
      * Set moderation
      *
-     * @param \Teapot\Base\ForumBundle\Entity\Moderation $moderation
+     * @param \Teapotio\Base\ForumBundle\Entity\Moderation $moderation
      *
      * @return Flag
      */
-    public function setModeration(\Teapot\Base\ForumBundle\Entity\Moderation $moderation)
+    public function setModeration(\Teapotio\Base\ForumBundle\Entity\Moderation $moderation)
     {
         $this->moderation = $moderation;
 
@@ -260,7 +260,7 @@ class Flag implements FlagInterface
     /**
      * Get moderation
      *
-     * @return \Teapot\Base\ForumBundle\Entity\Moderation
+     * @return \Teapotio\Base\ForumBundle\Entity\Moderation
      */
     public function getModeration()
     {

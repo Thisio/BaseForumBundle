@@ -6,17 +6,17 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  *
- * @category   Teapot
+ * @category   Teapotio
  * @package    BaseForumBundle
  * @author     Thomas Potaire
  */
 
-namespace Teapot\Base\ForumBundle\Entity;
+namespace Teapotio\Base\ForumBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Teapot\Base\ForumBundle\Entity\Moderation
+ * Teapotio\Base\ForumBundle\Entity\Moderation
  *
  * @ORM\MappedSuperclass
  */
@@ -72,22 +72,22 @@ class Moderation implements ModerationInterface
     protected $user;
 
     /**
-     * @var \Teapot\Base\ForumBundle\Entity\Board $board
+     * @var \Teapotio\Base\ForumBundle\Entity\Board $board
      */
     protected $board;
 
     /**
-     * @var \Teapot\Base\ForumBundle\Entity\Topic $topic
+     * @var \Teapotio\Base\ForumBundle\Entity\Topic $topic
      */
     protected $topic;
 
     /**
-     * @var \Teapot\Base\ForumBundle\Entity\Message $message
+     * @var \Teapotio\Base\ForumBundle\Entity\Message $message
      */
     protected $message;
 
     /**
-     * @var \Teapot\Base\ForumBundle\Entity\Flag $flag
+     * @var \Teapotio\Base\ForumBundle\Entity\Flag $flag
      */
     protected $flag;
 
@@ -197,10 +197,10 @@ class Moderation implements ModerationInterface
     /**
      * Set message
      *
-     * @param \Teapot\Base\ForumBundle\Entity\Message $message
+     * @param \Teapotio\Base\ForumBundle\Entity\Message $message
      * @return Moderation
      */
-    public function setMessage(\Teapot\Base\ForumBundle\Entity\Message $message)
+    public function setMessage(\Teapotio\Base\ForumBundle\Entity\Message $message)
     {
         $this->message = $message;
 
@@ -210,7 +210,7 @@ class Moderation implements ModerationInterface
     /**
      * Get message
      *
-     * @return \Teapot\Base\ForumBundle\Entity\Message
+     * @return \Teapotio\Base\ForumBundle\Entity\Message
      */
     public function getMessage()
     {
@@ -220,10 +220,10 @@ class Moderation implements ModerationInterface
     /**
      * Set topic
      *
-     * @param \Teapot\Base\ForumBundle\Entity\Topic $topic
+     * @param \Teapotio\Base\ForumBundle\Entity\Topic $topic
      * @return Moderation
      */
-    public function setTopic(\Teapot\Base\ForumBundle\Entity\Topic $topic)
+    public function setTopic(\Teapotio\Base\ForumBundle\Entity\Topic $topic)
     {
         $this->topic = $topic;
 
@@ -233,7 +233,7 @@ class Moderation implements ModerationInterface
     /**
      * Get topic
      *
-     * @return \Teapot\Base\ForumBundle\Entity\Topic
+     * @return \Teapotio\Base\ForumBundle\Entity\Topic
      */
     public function getTopic()
     {
@@ -243,10 +243,10 @@ class Moderation implements ModerationInterface
     /**
      * Set board
      *
-     * @param \Teapot\Base\ForumBundle\Entity\Board $board
+     * @param \Teapotio\Base\ForumBundle\Entity\Board $board
      * @return Moderation
      */
-    public function setBoard(\Teapot\Base\ForumBundle\Entity\Board $board)
+    public function setBoard(\Teapotio\Base\ForumBundle\Entity\Board $board)
     {
         $this->board = $board;
 
@@ -256,7 +256,7 @@ class Moderation implements ModerationInterface
     /**
      * Get board
      *
-     * @return \Teapot\Base\ForumBundle\Entity\Board
+     * @return \Teapotio\Base\ForumBundle\Entity\Board
      */
     public function getBoard()
     {
@@ -266,10 +266,10 @@ class Moderation implements ModerationInterface
     /**
      * Set flag
      *
-     * @param \Teapot\Base\ForumBundle\Entity\Flag $flag
+     * @param \Teapotio\Base\ForumBundle\Entity\Flag $flag
      * @return Moderation
      */
-    public function setFlag(\Teapot\Base\ForumBundle\Entity\Flag $flag)
+    public function setFlag(\Teapotio\Base\ForumBundle\Entity\Flag $flag)
     {
         $this->flag = $flag;
 
@@ -279,7 +279,7 @@ class Moderation implements ModerationInterface
     /**
      * Get flag
      *
-     * @return \Teapot\Base\ForumBundle\Entity\Flag
+     * @return \Teapotio\Base\ForumBundle\Entity\Flag
      */
     public function getFlag()
     {

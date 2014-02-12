@@ -6,20 +6,20 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  *
- * @category   Teapot
+ * @category   Teapotio
  * @package    BaseForumBundle
  * @author     Thomas Potaire
  */
 
-namespace Teapot\Base\ForumBundle\Service;
+namespace Teapotio\Base\ForumBundle\Service;
 
-use Teapot\Base\ForumBundle\Entity\Board;
-use Teapot\Base\ForumBundle\Entity\Topic;
-use Teapot\Base\ForumBundle\Entity\Message;
+use Teapotio\Base\ForumBundle\Entity\Board;
+use Teapotio\Base\ForumBundle\Entity\Topic;
+use Teapotio\Base\ForumBundle\Entity\Message;
 
-use Teapot\Base\ForumBundle\Entity\BoardInterface;
-use Teapot\Base\ForumBundle\Entity\TopicInterface;
-use Teapot\Base\ForumBundle\Entity\MessageInterface;
+use Teapotio\Base\ForumBundle\Entity\BoardInterface;
+use Teapotio\Base\ForumBundle\Entity\TopicInterface;
+use Teapotio\Base\ForumBundle\Entity\MessageInterface;
 
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -201,7 +201,7 @@ class AccessPermissionService extends BaseService
      */
     public function isSuperAdmin(UserInterface $user = null)
     {
-        return $this->container->get('teapot.user')->isSuperAdmin($user);
+        return $this->container->get('teapotio.user')->isSuperAdmin($user);
     }
 
     /**
@@ -213,7 +213,7 @@ class AccessPermissionService extends BaseService
      */
     public function isAdmin(UserInterface $user = null)
     {
-        return $this->container->get('teapot.user')->isAdmin($user);
+        return $this->container->get('teapotio.user')->isAdmin($user);
     }
 
     /**
@@ -258,7 +258,7 @@ class AccessPermissionService extends BaseService
             return true;
         }
 
-        if ($this->container->get('teapot.forum.board')->getViewableBoards($user)->count() !== 0) {
+        if ($this->container->get('teapotio.forum.board')->getViewableBoards($user)->count() !== 0) {
             $canSearch = true;
         }
 

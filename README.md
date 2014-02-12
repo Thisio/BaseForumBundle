@@ -1,4 +1,4 @@
-TeapotBaseForumBundle
+TeapotioBaseForumBundle
 ====================
 
 Work-in-progress ~ Unstable

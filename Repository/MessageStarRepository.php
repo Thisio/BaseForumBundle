@@ -6,14 +6,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  *
- * @category   Teapot
+ * @category   Teapotio
  * @package    BaseForumBundle
  * @author     Thomas Potaire
  */
 
-namespace Teapot\Base\ForumBundle\Repository;
+namespace Teapotio\Base\ForumBundle\Repository;
 
-use Teapot\Base\ForumBundle\Entity\MessageStarInterface;
+use Teapotio\Base\ForumBundle\Entity\MessageStarInterface;
 
 use Symfony\Component\Security\Core\User\UserInterface;
 

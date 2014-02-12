@@ -6,21 +6,21 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  *
- * @category   Teapot
+ * @category   Teapotio
  * @package    BaseForumBundle
  * @author     Thomas Potaire
  */
 
-namespace Teapot\Base\ForumBundle\Service;
+namespace Teapotio\Base\ForumBundle\Service;
 
-use Teapot\Base\ForumBundle\Entity\Board;
-use Teapot\Base\ForumBundle\Entity\BoardStat;
-use Teapot\Base\ForumBundle\Entity\Topic;
-use Teapot\Base\ForumBundle\Entity\Message;
+use Teapotio\Base\ForumBundle\Entity\Board;
+use Teapotio\Base\ForumBundle\Entity\BoardStat;
+use Teapotio\Base\ForumBundle\Entity\Topic;
+use Teapotio\Base\ForumBundle\Entity\Message;
 
-use Teapot\Base\ForumBundle\Entity\BoardInterface;
-use Teapot\Base\ForumBundle\Entity\TopicInterface;
-use Teapot\Base\ForumBundle\Entity\MessageInterface;
+use Teapotio\Base\ForumBundle\Entity\BoardInterface;
+use Teapotio\Base\ForumBundle\Entity\TopicInterface;
+use Teapotio\Base\ForumBundle\Entity\MessageInterface;
 
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -39,7 +39,7 @@ class MainService extends BaseService
      */
     public function forumPath($routeName, $entity = null)
     {
-        $useId = $this->container->getParameter('teapot.forum.url.use_id');
+        $useId = $this->container->getParameter('teapotio.forum.url.use_id');
 
         $parameters = array();
         $board = null;
@@ -58,10 +58,10 @@ class MainService extends BaseService
         }
 
         if ($topic instanceof TopicInterface) {
-            $parameters = array_merge($parameters, $this->container->get('teapot.forum.path')->getTopicParameters($topic));
+            $parameters = array_merge($parameters, $this->container->get('teapotio.forum.path')->getTopicParameters($topic));
         }
         if ($board instanceof BoardInterface) {
-            $parameters = array_merge($parameters, $this->container->get('teapot.forum.path')->getBoardParameters($board));
+            $parameters = array_merge($parameters, $this->container->get('teapotio.forum.path')->getBoardParameters($board));
         }
 
         return $this->container->get('router')->generate($routeName, $parameters);

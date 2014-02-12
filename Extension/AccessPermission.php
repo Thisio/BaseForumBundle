@@ -6,16 +6,16 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  *
- * @category   Teapot
+ * @category   Teapotio
  * @package    BaseForumBundle
  * @author     Thomas Potaire
  */
 
-namespace Teapot\Base\ForumBundle\Extension;
+namespace Teapotio\Base\ForumBundle\Extension;
 
-use Teapot\Base\ForumBundle\Entity\BoardInterface;
-use Teapot\Base\ForumBundle\Entity\TopicInterface;
-use Teapot\Base\ForumBundle\Entity\MessageInterface;
+use Teapotio\Base\ForumBundle\Entity\BoardInterface;
+use Teapotio\Base\ForumBundle\Entity\TopicInterface;
+use Teapotio\Base\ForumBundle\Entity\MessageInterface;
 
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -47,52 +47,52 @@ class AccessPermission extends \Twig_Extension {
 
     public function canCreateMessage(UserInterface $user = null, BoardInterface $board = null)
     {
-        return $this->container->get('teapot.forum.access_permission')->canCreateMessage($user, $board);
+        return $this->container->get('teapotio.forum.access_permission')->canCreateMessage($user, $board);
     }
 
     public function canCreateTopic(UserInterface $user = null, BoardInterface $board = null)
     {
-        return $this->container->get('teapot.forum.access_permission')->canCreateTopic($user, $board);
+        return $this->container->get('teapotio.forum.access_permission')->canCreateTopic($user, $board);
     }
 
     public function canCreateBoard(UserInterface $user = null, BoardInterface $board = null)
     {
-        return $this->container->get('teapot.forum.access_permission')->canCreateBoard($user, $board);
+        return $this->container->get('teapotio.forum.access_permission')->canCreateBoard($user, $board);
     }
 
     public function canView(UserInterface $user = null, $entity)
     {
-        return $this->container->get('teapot.forum.access_permission')->canView($user, $entity);
+        return $this->container->get('teapotio.forum.access_permission')->canView($user, $entity);
     }
 
     public function canEdit(UserInterface $user = null, $entity)
     {
-        return $this->container->get('teapot.forum.access_permission')->canEdit($user, $entity);
+        return $this->container->get('teapotio.forum.access_permission')->canEdit($user, $entity);
     }
 
     public function canDelete(UserInterface $user = null, $entity)
     {
-        return $this->container->get('teapot.forum.access_permission')->canDelete($user, $entity);
+        return $this->container->get('teapotio.forum.access_permission')->canDelete($user, $entity);
     }
 
     public function canSearch(UserInterface $user = null)
     {
-        return $this->container->get('teapot.forum.access_permission')->canSearch($user);
+        return $this->container->get('teapotio.forum.access_permission')->canSearch($user);
     }
 
     public function isSuperAdmin(UserInterface $user = null)
     {
-        return $this->container->get('teapot.forum.access_permission')->isSuperAdmin($user);
+        return $this->container->get('teapotio.forum.access_permission')->isSuperAdmin($user);
     }
 
     public function isAdmin(UserInterface $user = null)
     {
-        return $this->container->get('teapot.forum.access_permission')->isAdmin($user);
+        return $this->container->get('teapotio.forum.access_permission')->isAdmin($user);
     }
 
     public function isModerator(UserInterface $user = null)
     {
-        return $this->container->get('teapot.forum.access_permission')->isModerator($user);
+        return $this->container->get('teapotio.forum.access_permission')->isModerator($user);
     }
 
     public function getName()
