@@ -451,6 +451,41 @@ class AccessPermissionService extends BaseService
     }
 
     /**
+     * Defines if a user can flag a type of entity.
+     * You can only flag a topic or a message for now.
+     *
+     * @param UserInterface $user = null
+     * @param BoardInterface|TopicInterface $entity
+     *
+     * @return boolean
+     */
+    public function canFlag(UserInterface $user = null, $entity)
+    {
+        // If the user is not logged in then return false
+        // Note: we could have a special system where logged out users
+        //       could flag content
+        if ($user === null) {
+            return false;
+        }
+
+        // If the entity has a user set and if the author of the entity
+        // is the given user then return false.
+        if ($entity->getUser() !== null &&
+            $entity->getUser()->getId() === $user->getId()) {
+            return false;
+        }
+
+        // If the given user is a moderator, an admin or a super admin
+        // then return false.
+        if ($this->isModerator($entity->getUser()) === true) {
+          return false;
+        }
+
+        // Otherwise return true
+        return true;
+    }
+
+    /**
      * Defines if a user can undelete a type of entity
      *
      * @param   UserInterface                                   $user = null

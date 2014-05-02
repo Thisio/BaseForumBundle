@@ -38,6 +38,7 @@ class AccessPermission extends \Twig_Extension {
             "can_view"              => new \Twig_Filter_Method($this, 'canView'),
             "can_edit"              => new \Twig_Filter_Method($this, 'canEdit'),
             "can_delete"            => new \Twig_Filter_Method($this, 'canDelete'),
+            "can_flag"              => new \Twig_Filter_Method($this, 'canFlag'),
             "can_search"            => new \Twig_Filter_Method($this, 'canSearch'),
             "is_super_admin"        => new \Twig_Filter_Method($this, 'isSuperAdmin'),
             "is_admin"              => new \Twig_Filter_Method($this, 'isAdmin'),
@@ -73,6 +74,11 @@ class AccessPermission extends \Twig_Extension {
     public function canDelete(UserInterface $user = null, $entity)
     {
         return $this->container->get('teapotio.forum.access_permission')->canDelete($user, $entity);
+    }
+
+    public function canFlag(UserInterface $user = null, $entity)
+    {
+        return $this->container->get('teapotio.forum.access_permission')->canFlag($user, $entity);
     }
 
     public function canSearch(UserInterface $user = null)
