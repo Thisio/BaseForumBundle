@@ -91,7 +91,7 @@ class ModerationService extends BaseService
         $this->save($moderation);
 
         // If the item is currently flagged and the flag hasn't been moderated
-        if ($flag !== null && $flag->setModeration() === null) {
+        if ($flag !== null && $flag->getModeration() === null) {
             $flag->setModeration($moderation);
             $this->container->get('teapotio.forum.flag')->save($flag);
         }

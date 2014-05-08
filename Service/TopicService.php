@@ -79,11 +79,12 @@ class TopicService extends BaseService
      * Get the latest topics in general
      *
      * @param  integer  $offset
-     * @param  itenger  $limit
+     * @param  integer  $limit
+     * @param  boolean  $isDeleted = false
      *
      * @return \Doctrine\ORM\Tools\Pagination\Paginator
      */
-    public function getLatestTopics($offset, $limit)
+    public function getLatestTopics($offset, $limit, $isDeleted = false)
     {
         list($viewableBoardIds, $restrictedBoardIds) = $this->container
                                                             ->get('teapotio.forum.board')
@@ -91,7 +92,7 @@ class TopicService extends BaseService
 
         return $this->em
                     ->getRepository($this->topicRepositoryClass)
-                    ->getLatestTopics($offset, $limit, $viewableBoardIds, $restrictedBoardIds);
+                    ->getLatestTopics($offset, $limit, $isDeleted, $viewableBoardIds, $restrictedBoardIds);
     }
 
     /**
@@ -404,6 +405,27 @@ class TopicService extends BaseService
     }
 
     /**
+     * Call this function when the topic is being viewed
+     *
+     * @param  TopicInterface  $topic
+     *
+     * @return TopicService
+     */
+    public function view(TopicInterface $topic)
+    {
+        $previousPath = parse_url($this->container->get('request')->headers->get('referer'));
+        $previousPath = $previousPath['path'];
+
+        $currentPath = $this->container->get('request')->getPathInfo();
+
+        if ($previousPath !== $currentPath) {
+          $this->incrementTotalViews($topic);
+        }
+
+        return $this;
+    }
+
+    /**
      * Add a given number to the views count of a given topic
      *
      * @param  TopicInterface   $topic
@@ -413,9 +435,11 @@ class TopicService extends BaseService
      */
     public function incrementTotalViews(TopicInterface $topic, $increment = 1)
     {
-        $topic->increaseTotalPosts($increment);
+        $topic->increaseTotalViews($increment);
 
         $this->save($topic);
+
+        return $this;
     }
 
     /**

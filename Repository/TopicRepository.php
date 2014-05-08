@@ -51,16 +51,22 @@ class TopicRepository extends EntityRepository
      *
      * @param  integer  $offset
      * @param  integer  $limit
+     * @param  boolean  $isDeleted
      * @param  array    $viewableBoardIds
      * @param  array    $restrictedBoardIds
      *
      * @return \Doctrine\ORM\Tools\Pagination\Paginator
      */
-    public function getLatestTopics($offset, $limit, $viewableBoardIds, $restrictedBoardIds)
+    public function getLatestTopics($offset, $limit, $isDeleted, $viewableBoardIds, $restrictedBoardIds)
     {
         $queryBuilder = $this->createQueryBuilder('t')
                       ->select(array('t'))
                       ->orderBy('t.lastMessageDate', 'DESC');
+
+        if ($isDeleted !== null) {
+          $queryBuilder->where('t.isDeleted = :isDeleted')
+                       ->setParameter('isDeleted', $isDeleted);
+        }
 
         if (count($viewableBoardIds) > count($restrictedBoardIds) && count($restrictedBoardIds) !== 0) {
             $queryBuilder->andWhere($queryBuilder->expr()->notIn('t.board', $restrictedBoardIds));
