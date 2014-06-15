@@ -131,4 +131,24 @@ class MessageRepository extends EntityRepository
             return null;
         }
     }
+
+    /**
+     * Get topic bodies by topic ids
+     *
+     * @param  array  $topicIds
+     *
+     * @return array
+     */
+    public function getTopicBodiesByTopicIds(array $topicIds)
+    {
+        $queryBuilder = $this->createQueryBuilder('m')
+                             ->select(array('m'))
+                             ->andWhere('m.isTopicBody = 1');
+
+        $queryBuilder->andWhere($queryBuilder->expr()->in('m.topic', $topicIds));
+
+        $query = $queryBuilder->getQuery();
+
+        return new ArrayCollection($query->getResult());
+    }
 }

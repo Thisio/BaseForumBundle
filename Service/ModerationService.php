@@ -45,9 +45,20 @@ class ModerationService extends BaseService
      */
     public function getLatestModerations($offset, $limit)
     {
-        return $this->em
+        $moderations = $this->em
                     ->getRepository($this->moderationRepositoryClass)
                     ->getLatestModerations($offset, $limit);
+
+        $topics = array();
+        foreach ($moderations as $moderation) {
+            if ($moderation->getTopic() !== null) {
+                $topics[] = $moderation->getTopic();
+            }
+        }
+
+        $this->container->get('teapotio.forum.topic')->loadTopicBodies($topics);
+
+        return $moderations;
     }
 
     /**

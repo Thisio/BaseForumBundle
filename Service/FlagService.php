@@ -120,7 +120,7 @@ class FlagService extends BaseService
      * Delete a flag, its flagged item and returns true
      *
      * @param  FlagInterface  $flag
-     * @param  UserInterface  $user
+     * @param  UserInterface  $user  the user that triggered the action
      *
      * @return boolean
      */
@@ -239,14 +239,26 @@ class FlagService extends BaseService
      * @param  integer   $offset = 0
      * @param  integer   $limit = 15
      * @param  boolean   $isDeleted = false
+     * @param  boolean   $loadTopicBodies = false
      *
      * @return Paginator
      */
-    public function getLatestFlags($offset = 0, $limit = 15, $isDeleted = false)
+    public function getLatestFlags($offset = 0, $limit = 15, $isDeleted = false, $loadTopicBodies = false)
     {
-        return $this->em
-                    ->getRepository($this->flagRepositoryClass)
-                    ->getLatestFlags($offset, $limit, $isDeleted);
+        $flags = $this->em
+                      ->getRepository($this->flagRepositoryClass)
+                      ->getLatestFlags($offset, $limit, $isDeleted);
+
+        $topics = array();
+        foreach ($flags as $flag) {
+            if ($flag->getTopic() !== null) {
+                $topics[] = $flag->getTopic();
+            }
+        }
+
+        $this->container->get('teapotio.forum.topic')->loadTopicBodies($topics);
+
+        return $flags;
     }
 
 }

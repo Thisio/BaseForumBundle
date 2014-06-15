@@ -288,7 +288,7 @@ class Moderation implements ModerationInterface
 
 
     //
-    // CONVINIENT METHODS
+    // CONVENIENT METHODS
     //
 
     /**

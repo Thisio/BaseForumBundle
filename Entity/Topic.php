@@ -118,6 +118,11 @@ class Topic implements TopicInterface
     protected $board;
 
     /**
+     * @var \Teapotio\Base\ForumBundle\Entity\Message $body
+     */
+    protected $body = false;
+
+    /**
      * @var ArrayCollection
      */
     protected $messages;
@@ -473,7 +478,7 @@ class Topic implements TopicInterface
      * @param \Teapotio\Base\ForumBundle\Entity\Board $board
      * @return Topic
      */
-    public function setBoard(\Teapotio\Base\ForumBundle\Entity\Board $board)
+    public function setBoard(\Teapotio\Base\ForumBundle\Entity\BoardInterface $board)
     {
         $this->board = $board;
 
@@ -483,11 +488,34 @@ class Topic implements TopicInterface
     /**
      * Get board
      *
-     * @return \Teapotio\Base\ForumBundle\Entity\Board
+     * @return \Teapotio\Base\ForumBundle\Entity\BoardInterface
      */
     public function getBoard()
     {
         return $this->board;
+    }
+
+    /**
+     * Set body
+     *
+     * @param \Teapotio\Base\ForumBundle\Entity\MessageInterface $board
+     * @return Topic
+     */
+    public function setBody(\Teapotio\Base\ForumBundle\Entity\MessageInterface $body)
+    {
+        $this->body = $body;
+
+        return $this;
+    }
+
+    /**
+     * Get body
+     *
+     * @return \Teapotio\Base\ForumBundle\Entity\MessageInterface
+     */
+    public function getBody()
+    {
+        return $this->body;
     }
 
     /**

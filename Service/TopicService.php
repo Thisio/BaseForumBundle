@@ -101,14 +101,15 @@ class TopicService extends BaseService
      * @param  array    $boardIds
      * @param  integer  $offset
      * @param  integer  $limit
+     * @param  integer  $isDeleted = false
      *
      * @return \Doctrine\ORM\Tools\Pagination\Paginator
      */
-    public function getLatestTopicsByBoardIds($boardIds, $offset, $limit)
+    public function getLatestTopicsByBoardIds($boardIds, $offset, $limit, $isDeleted = false)
     {
         return $this->em
                     ->getRepository($this->topicRepositoryClass)
-                    ->getLatestTopicsByBoardIds($boardIds, $offset, $limit);
+                    ->getLatestTopicsByBoardIds($boardIds, $offset, $limit, $isDeleted);
     }
 
     /**
@@ -173,6 +174,38 @@ class TopicService extends BaseService
         return $this->em
                     ->getRepository($this->topicRepositoryClass)
                     ->moveFromBoardToBoard($from, $to);
+    }
+
+    /**
+     * Load the bodies of the given topics
+     *
+     * @param mixed        $topics
+     * @param \Closure     $filter   load a limited set of topic's body (for instance, only by pinned or locked)
+     */
+    public function loadTopicBodies($topics, \Closure $filter = null)
+    {
+        $topicIds = array();
+        foreach ($topics as $topic) {
+          if ($filter === null || $filter($topic) === true) {
+            $topicIds[] = $topic->getId();
+          }
+        }
+
+        if (count($topicIds) === 0) {
+          return $topics;
+        }
+
+        $messages = $this->container
+                         ->get('teapotio.forum.message')
+                         ->getTopicBodiesByTopicIds($topicIds);
+
+        foreach ($topics as $topic) {
+          if (isset($messages[$topic->getId()]) === true) {
+            $topic->setBody($messages[$topic->getId()]);
+          }
+        }
+
+        return $topics;
     }
 
     /**

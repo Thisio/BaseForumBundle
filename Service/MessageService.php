@@ -93,6 +93,27 @@ class MessageService extends BaseService
     }
 
     /**
+     * Get topic bodies by topic ids
+     *
+     * @param  array  $topicIds
+     *
+     * @return array indexed by topic ids
+     */
+    public function getTopicBodiesByTopicIds(array $topicIds)
+    {
+        $messages = $this->em
+                         ->getRepository($this->messageRepositoryClass)
+                         ->getTopicBodiesByTopicIds($topicIds);
+
+        $bodies = array();
+        foreach ($messages as $message) {
+          $bodies[$message->getTopic()->getId()] = $message;
+        }
+
+        return $bodies;
+    }
+
+    /**
      * Flag a message object
      *
      * @param  MessageInterface   $message

@@ -422,6 +422,18 @@
                 <source>in.%title%</source>
                 <target>in %title%</target>
             </trans-unit>
+            <trans-unit id="106">
+                <source>List.of.flags</source>
+                <target>List of flags</target>
+            </trans-unit>
+            <trans-unit id="107">
+                <source>List.of.moderations</source>
+                <target>List of moderations</target>
+            </trans-unit>
+            <trans-unit id="108">
+                <source>The.message.below.was.flagged.%total%.times.and.has.been.deleted.by.%username%</source>
+                <target>The message below was flagged %total% times and has been deleted by %username%.</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
