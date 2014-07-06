@@ -434,6 +434,10 @@
                 <source>The.message.below.was.flagged.%total%.times.and.has.been.deleted.by.%username%</source>
                 <target>The message below was flagged %total% times and has been deleted by %username%.</target>
             </trans-unit>
+            <trans-unit id="109">
+                <source>The.view.permission.will.be.replicated.to.parent.boards.and.children</source>
+                <target>The "View" permission will be replicated to the parent boards and children.</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

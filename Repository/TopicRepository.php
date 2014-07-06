@@ -103,7 +103,7 @@ class TopicRepository extends EntityRepository
         $queryBuilder->where($queryBuilder->expr()->in('t.board', $boardIds));
 
         if ($isDeleted !== null) {
-          $queryBuilder->where('t.isDeleted = :isDeleted')
+          $queryBuilder->andWhere('t.isDeleted = :isDeleted')
                        ->setParameter('isDeleted', $isDeleted);
         }
 

@@ -16,6 +16,7 @@ namespace Teapotio\Base\ForumBundle\Service;
 use Teapotio\Base\ForumBundle\Entity\Board;
 use Teapotio\Base\ForumBundle\Entity\Topic;
 use Teapotio\Base\ForumBundle\Entity\Message;
+use Teapotio\Base\ForumBundle\Entity\AnonymousUserGroup;
 
 use Teapotio\Base\ForumBundle\Entity\BoardInterface;
 use Teapotio\Base\ForumBundle\Entity\TopicInterface;
@@ -31,30 +32,47 @@ class AccessPermissionService extends BaseService
 
     /**
      * Set all permissions on boards from the post data
+     * If you don't specify a list of boardIds this method may reset all
+     * permissions of all boards.
      *
      * @param  integer   $groupId
      * @param  array     $data
      */
-    public function setPermissionsOnBoardsFromPostData($groupId, $data)
+    public function setPermissionsOnBoardsFromPostData($groupId, array $data, array $boardIds = array())
     {
         $normalizedData = $this->translatePostDataInNormalizedData($groupId, $data);
 
-        $this->setPermissionsOnBoardsFromNormalizedData($groupId, $normalizedData);
+        $this->setPermissionsOnBoardsFromNormalizedData($groupId, $normalizedData, $boardIds);
     }
 
     /**
      * Set all permissions on boards from normalized data
+     * If you don't specify a list of boardIds this method may reset all
+     * permissions of all boards.
      *
      * @param  integer   $groupId
      * @param  array     $data
+     * @param  array     $boardIds = array()
      */
-    public function setPermissionsOnBoardsFromNormalizedData($groupId, $data)
+    public function setPermissionsOnBoardsFromNormalizedData($groupId, array $data, array $boardIds = array())
     {
-        $boards = $this->em->getRepository($this->boardRepositoryClass)->getBoards(null);
+        if (empty($boardIds) === true) {
+            $boards = $this->container->get('teapotio.forum.board')->getBoards(null);
+        } else {
+            $boards = $this->container->get('teapotio.forum.board')->getByIds($boardIds);
+        }
 
         // go through each board and its children recursively
         foreach ($boards as $board) {
             $this->setPermissionsOnBoardFromNormalizedData($board, $groupId, $data);
+
+            // Replicate the permission to the children
+            foreach ($board->getChildren() as $b) {
+                $this->replicateViewPermission($board, $b, $groupId);
+            }
+
+            // Replicate the view permission to the parent (only if the value is true)
+            $this->replicateViewPermissionToParents($board, $board->getParent(), $groupId);
         }
 
         $this->em->flush();
@@ -69,7 +87,7 @@ class AccessPermissionService extends BaseService
      *
      * @return  bool    returns whether permissions were changed or not
      */
-    protected function setPermissionsOnBoardFromNormalizedData(BoardInterface $board, $groupId, $data)
+    protected function setPermissionsOnBoardFromNormalizedData(BoardInterface $board, $groupId, array $data)
     {
         $permissionChanged = false;
 
@@ -123,6 +141,7 @@ class AccessPermissionService extends BaseService
     protected function translatePostDataInNormalizedData($groupId, $data)
     {
         $normalizedData = array();
+        $anonymousUserGroup = new AnonymousUserGroup();
 
         foreach ($data as $boardId => $permissions) {
 
@@ -146,6 +165,11 @@ class AccessPermissionService extends BaseService
             $normalizedData[$boardId][$groupId][Board::ACCESS_OBJECT_MESSAGE][Board::ACCESS_ACTION_VIEW] = (int)$canView;
             $normalizedData[$boardId][$groupId][Board::ACCESS_OBJECT_TOPIC][Board::ACCESS_ACTION_VIEW] = (int)$canView;
             $normalizedData[$boardId][$groupId][Board::ACCESS_OBJECT_BOARD][Board::ACCESS_ACTION_VIEW] = (int)$canView;
+
+            // Anonymous group should only be able to view
+            if ($groupId === $anonymousUserGroup->getId()) {
+                continue;
+            }
 
             // Loop through the different objects
             foreach ($permissions as $objectType => $actions) {
@@ -190,6 +214,81 @@ class AccessPermissionService extends BaseService
         }
 
         return $normalizedData;
+    }
+
+    /**
+     * Replicate the view permission of a board to the parents
+     * If a user can see a board then by extension the user can see the parent boards
+     *
+     * @param  BoardInterface  $from
+     * @param  BoardInterface  $to
+     * @param  integer         $groupId
+     *
+     * @return BoardInterface  the original BoardInterface
+     */
+    protected function replicateViewPermissionToParents(BoardInterface $from, BoardInterface $to = null, $groupId)
+    {
+        if ($to === null) {
+            return $from;
+        }
+
+        // Go through the board's permissions and if the user can see the different
+        // entities within boards then grant the same permission on the parent boards
+        $canViewBoard = $from->hasGroupAccessById($groupId, Board::ACCESS_OBJECT_BOARD, Board::ACCESS_ACTION_VIEW);
+        if ($canViewBoard === true) {
+            $to->setPermission($groupId, Board::ACCESS_OBJECT_BOARD, Board::ACCESS_ACTION_VIEW, $canViewBoard);
+        }
+
+        $canViewTopic = $from->hasGroupAccessById($groupId, Board::ACCESS_OBJECT_BOARD, Board::ACCESS_ACTION_VIEW);
+        if ($canViewTopic === true) {
+            $to->setPermission($groupId, Board::ACCESS_OBJECT_TOPIC, Board::ACCESS_ACTION_VIEW, $canViewTopic);
+        }
+
+        $canViewMessage = $from->hasGroupAccessById($groupId, Board::ACCESS_OBJECT_MESSAGE, Board::ACCESS_ACTION_VIEW);
+        if ($canViewMessage === true) {
+            $to->setPermission($groupId, Board::ACCESS_OBJECT_MESSAGE, Board::ACCESS_ACTION_VIEW, $canViewMessage);
+        }
+
+        $to->serializePermissions();
+
+        $this->em->persist($to);
+
+        // Recurcisely replicate the permissions to the parent
+        $this->replicateViewPermissionToParents($from, $to->getParent(), $groupId);
+
+        return $from;
+    }
+
+    /**
+     * Replicate the view permission of a board to another
+     *
+     * @param  BoardInterface  $from
+     * @param  BoardInterface  $to
+     * @param  integer         $groupId
+     *
+     * @return BoardInterface  the original BoardInterface
+     */
+    protected function replicateViewPermission(BoardInterface $from, BoardInterface $to = null, $groupId)
+    {
+        if ($to === null) {
+            return $from;
+        }
+
+        // Go through the board's permissions and replicate them to the other board
+        $canViewBoard = $from->hasGroupAccessById($groupId, Board::ACCESS_OBJECT_BOARD, Board::ACCESS_ACTION_VIEW);
+        $to->setPermission($groupId, Board::ACCESS_OBJECT_BOARD, Board::ACCESS_ACTION_VIEW, $canViewBoard);
+
+        $canViewTopic = $from->hasGroupAccessById($groupId, Board::ACCESS_OBJECT_BOARD, Board::ACCESS_ACTION_VIEW);
+        $to->setPermission($groupId, Board::ACCESS_OBJECT_TOPIC, Board::ACCESS_ACTION_VIEW, $canViewTopic);
+
+        $canViewMessage = $from->hasGroupAccessById($groupId, Board::ACCESS_OBJECT_MESSAGE, Board::ACCESS_ACTION_VIEW);
+        $to->setPermission($groupId, Board::ACCESS_OBJECT_MESSAGE, Board::ACCESS_ACTION_VIEW, $canViewMessage);
+
+        $to->serializePermissions();
+
+        $this->em->persist($to);
+
+        return $from;
     }
 
     /**
@@ -396,6 +495,8 @@ class AccessPermissionService extends BaseService
 
         /**
          * @todo this should be more complex
+         *       any entity should be able to return its related board so we can
+         *       test if the current user is a moderator through the method isModerator()
          */
         if ($entity->getUser() === null || $user->getId() !== $entity->getUser()->getId()) {
             return false;
@@ -434,6 +535,8 @@ class AccessPermissionService extends BaseService
 
         /**
          * @todo this should be more complex
+         *       any entity should be able to return its related board so we can
+         *       test if the current user is a moderator through the method isModerator()
          */
         if ($user->getId() !== $entity->getUser()->getId()) {
             return false;

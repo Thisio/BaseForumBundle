@@ -19,6 +19,8 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\Role\RoleInterface;
 
+use Teapotio\Base\ForumBundle\Entity\AnonymousUserGroup;
+
 /**
  * Teapotio\Base\ForumBundle\Entity\Board
  *
@@ -357,6 +359,19 @@ class Board implements BoardInterface
     }
 
     /**
+     * Set a permission on the board
+     *
+     * @param  integer  $groupId
+     * @param  string   $objectType
+     * @param  integer  $permission
+     * @param  boolean  $boolean
+     */
+    public function setPermission($groupId, $objectType, $permission, $boolean)
+    {
+        $this->permissions[$groupId][$objectType][$permission] = (int) $boolean;
+    }
+
+    /**
      * Get permissions
      *
      * @return array
@@ -664,19 +679,27 @@ class Board implements BoardInterface
     /**
      * Serialize the permissions
      * We don't rely on doctrine events because we sometimes lazyload
+     *
+     * @return BoardInterface
      */
     public function serializePermissions()
     {
         $this->serializedPermissions = json_encode($this->permissions);
+
+        return $this;
     }
 
     /**
      * Unserialize the permissions
      * We don't rely on doctrine events because we sometimes lazyload
+     *
+     * @return BoardInterface
      */
     public function unserializePermissions()
     {
         $this->permissions = json_decode($this->serializedPermissions, true);
+
+        return $this;
     }
 
     /**
@@ -882,7 +905,15 @@ class Board implements BoardInterface
         $hasAccess = false;
 
         if ($user === null) {
-            return false;
+            // An anonymous user should only be able to view the different objects
+            // If you would like anonymous users to have more freedom then consider
+            // submitting on pull request.
+            if ($permission !== self::ACCESS_ACTION_VIEW) {
+                return false;
+            } else {
+                $group = new AnonymousUserGroup();
+                return $this->hasGroupAccess($group, $objectType, $permission);
+            }
         }
 
         foreach ($user->getGroups() as $group) {
@@ -1048,28 +1079,42 @@ class Board implements BoardInterface
      *
      * @return boolean
      */
-    protected function hasGroupAccess(RoleInterface $group, $objectType, $permission)
+    public function hasGroupAccess(RoleInterface $group, $objectType, $permission)
+    {
+        return $this->hasGroupAccessById($group->getId(), $objectType, $permission);
+    }
+
+    /**
+     * Returns whether a group has access (or not) to a Forum object within its children (boards, topics or messages)
+     *
+     * @param  integer  $groupId
+     * @param  string   $objecType    "board", "message" or "topic"
+     * @param  integer  $permission   the values are defined above in constants
+     *
+     * @return boolean
+     */
+    public function hasGroupAccessById($groupId, $objectType, $permission)
     {
         $permissions = $this->getPermissions();
 
         $objectType = strtolower($objectType);
 
         // if the group hasn't been defined in the permissions return false by default
-        if (array_key_exists($group->getId(), $permissions) === false) {
+        if (array_key_exists($groupId, $permissions) === false) {
             return false;
         }
 
         // if the object's permissions has not been defined we just deny access
-        if (array_key_exists($objectType, $permissions[$group->getId()]) === false) {
+        if (array_key_exists($objectType, $permissions[$groupId]) === false) {
             return false;
         }
 
         // If the permission isn't set return false
-        if (array_key_exists($permission, $permissions[$group->getId()][$objectType]) === false) {
+        if (array_key_exists($permission, $permissions[$groupId][$objectType]) === false) {
             return false;
         }
 
-        if ($permissions[$group->getId()][$objectType][$permission] === 1) {
+        if ($permissions[$groupId][$objectType][$permission] === 1) {
             return true;
         } else {
             return false;

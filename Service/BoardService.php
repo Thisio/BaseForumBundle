@@ -19,6 +19,8 @@ use Teapotio\Base\ForumBundle\Entity\Message;
 
 use Teapotio\Base\ForumBundle\Entity\BoardInterface;
 
+use Symfony\Component\Security\Core\User\UserInterface;
+
 use Doctrine\Common\Collections\ArrayCollection;
 
 class BoardService extends BaseService
@@ -65,7 +67,7 @@ class BoardService extends BaseService
     /**
      * Returns a multi-dimensional array
      * - first key is a list of viewable board ids
-     * - second key is a lost of restricted board ids
+     * - second key is a list of restricted board ids
      *
      * @return array(array(viewableBoardIds), array(restrictedBoardIds))
      */
@@ -107,6 +109,22 @@ class BoardService extends BaseService
         return $this->em
                     ->getRepository($this->boardRepositoryClass)
                     ->find($boardId);
+    }
+
+    /**
+     * Get a collection of boards by ids
+     *
+     * @param  array  $boardIds
+     *
+     * @return ArrayCollection
+     */
+    public function getByIds(array $boardIds)
+    {
+        $boards = $this->em
+                       ->getRepository($this->boardRepositoryClass)
+                       ->findById($boardIds);
+
+        return new ArrayCollection($boards);
     }
 
     /**
@@ -204,13 +222,13 @@ class BoardService extends BaseService
 
             $this->viewableBoards->add($board);
 
-            // Entity is forced partial load so initialize the collection
+            // Entity is partially loaded so initialize the collection
             $board->setChildren(new ArrayCollection());
 
             $map[$board->getId()] = $board;
 
-            // If parentId it means the board is at the root of the tree
-            if ($parentId === null) {
+            // If parentId is null it means the board is at the root of the tree
+            if ($parentId === null || array_key_exists($parentId, $map) === false) {
                 $mainBoards->add($board);
             }
             else {
@@ -270,18 +288,21 @@ class BoardService extends BaseService
      * and recursively get the children of the children
      *
      * @param  BoardInterface  $board
+     * @param  UserInterface   $checkPermissions = null
      *
      * @return array
      */
-    public function getChildrenIdsFromBoard(BoardInterface $board)
+    public function getChildrenIdsFromBoard(BoardInterface $board, UserInterface $user = null)
     {
         $ids = array();
 
         foreach ($board->getChildren() as $b) {
-            $ids[] = $b->getId();
+            if ($this->container->get('teapotio.forum.access_permission')->canView($user, $board) === true) {
+              $ids[] = $b->getId();
+            }
 
             if ($b->getChildren()->count() !== 0) {
-                $ids = array_merge($ids, $this->getChildrenIdsFromBoard($b));
+                $ids = array_merge($ids, $this->getChildrenIdsFromBoard($b, $user));
             }
         }
 
