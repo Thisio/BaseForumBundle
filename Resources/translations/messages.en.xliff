@@ -438,6 +438,10 @@
                 <source>The.view.permission.will.be.replicated.to.parent.boards.and.children</source>
                 <target>The "View" permission will be replicated to the parent boards and children.</target>
             </trans-unit>
+            <trans-unit id="110">
+                <source>Login.or.signup.if.you.would.like.to.post</source>
+                <target>Log in or sign up if you would like to post.</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
