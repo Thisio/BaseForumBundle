@@ -2,7 +2,7 @@
     "name": "teapotio/base-forum-bundle",
     "type": "symfony-bundle",
     "description": "ForumBundle for Symfony2",
-    "keywords": ["Forum", "Messages", "Private Messages"],
+    "keywords": ["Forum", "Messages", "Discussion boards"],
     "homepage": "https://github.com/teapotio/BaseForumBundle",
     "license": "MIT",
     "authors": [
@@ -22,5 +22,6 @@
     "autoload": {
         "psr-0": { "Teapotio\\Base\\ForumBundle": "" }
     },
-    "target-dir": "Teapotio/Base/ForumBundle"
+    "target-dir": "Teapotio/Base/ForumBundle",
+    "minimum-stability": "dev"
 }
