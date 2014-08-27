@@ -42,7 +42,7 @@ class Topic implements TopicInterface
     /**
      * @var string $slug
      *
-     * @ORM\Column(name="slug", type="string", length=32)
+     * @ORM\Column(name="slug", type="string", length=128)
      */
     protected $slug;
 
