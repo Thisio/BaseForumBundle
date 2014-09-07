@@ -144,11 +144,6 @@ class MessageService extends BaseService
             throw new \Teapotio\Base\ForumBundle\Exception\TopicNotSetException();
         }
 
-        /**
-         * Update the last message of topic
-         */
-        $message->getTopic()->setLastMessageDate(new \DateTime());
-
         if ($message->getId() === null) {
             $message->setDateCreated(new \DateTime());
 
@@ -163,6 +158,11 @@ class MessageService extends BaseService
                 $this->container
                      ->get('teapotio.forum.topic')
                      ->incrementTotalPosts($message->getTopic());
+
+                /**
+                 * Update the last message of topic
+                 */
+                $message->getTopic()->setLastMessageDate(new \DateTime());
 
                 // Get the user stat
                 $userStat = $this->container

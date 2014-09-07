@@ -250,7 +250,7 @@ class TopicService extends BaseService
             $userStat->increaseTotalMessage();
         }
         else {
-            $topic->getDateModified(new \DateTime());
+            $topic->setDateModified(new \DateTime());
         }
 
         $this->em->persist($topic);
