@@ -37,7 +37,7 @@ class TopicService extends BaseService
      *
      * @param  integer  $topicId
      *
-     * @return Topic
+     * @return Topic|null
      */
     public function getById($topicId)
     {
@@ -51,13 +51,41 @@ class TopicService extends BaseService
      *
      * @param  string  $topicSlug
      *
-     * @return Topic
+     * @return Topic|null
      */
     public function getBySlug($topicSlug)
     {
         return $this->em
                     ->getRepository($this->topicRepositoryClass)
                     ->findOneBySlug($topicSlug);
+    }
+
+    /**
+     * Get a list of topics by a given topic slug
+     *
+     * @param  string  $topicTitle
+     *
+     * @return array
+     */
+    public function getTopicsBySlug($topicSlug)
+    {
+        return $this->em
+                    ->getRepository($this->topicRepositoryClass)
+                    ->findBySlug($topicSlug);
+    }
+
+    /**
+     * Get a list of topics by a given topic title
+     *
+     * @param  string  $topicTitle
+     *
+     * @return array
+     */
+    public function getTopicsByTitle($topicTitle)
+    {
+        return $this->em
+                    ->getRepository($this->topicRepositoryClass)
+                    ->findByTitle($topicTitle);
     }
 
     /**
@@ -118,14 +146,15 @@ class TopicService extends BaseService
      * @param  BoardInterface    $board
      * @param  integer           $offset
      * @param  integer           $limit
+     * @param  integer           $isDeleted = false
      *
      * @return \Doctrine\ORM\Tools\Pagination\Paginator
      */
-    public function getLatestTopicsByBoard(BoardInterface $board, $offset, $limit)
+    public function getLatestTopicsByBoard(BoardInterface $board, $offset, $limit, $isDeleted = false)
     {
         return $this->em
                     ->getRepository($this->topicRepositoryClass)
-                    ->getLatestTopicsByBoard($board, $offset, $limit);
+                    ->getLatestTopicsByBoard($board, $offset, $limit, $isDeleted);
     }
 
     /**
@@ -239,6 +268,10 @@ class TopicService extends BaseService
 
         // If the topic is new
         if ($topic->getId() === null) {
+            $this->container
+                 ->get('teapotio.forum.path')
+                 ->onTopicCreate($topic);
+
             $topic->setDateCreated(new \DateTime());
 
             // Get the user stat
@@ -250,6 +283,10 @@ class TopicService extends BaseService
             $userStat->increaseTotalMessage();
         }
         else {
+            $this->container
+                 ->get('teapotio.forum.path')
+                 ->onTopicEdit($topic);
+
             $topic->setDateModified(new \DateTime());
         }
 

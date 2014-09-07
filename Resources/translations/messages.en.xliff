@@ -450,6 +450,18 @@
                 <source>Unstar</source>
                 <target>Unstar</target>
             </trans-unit>
+            <trans-unit id="113">
+                <source>Topic.title.is.already.in.use</source>
+                <target>This topic title is already in use.</target>
+            </trans-unit>
+            <trans-unit id="114">
+                <source>Board.title.is.already.in.use</source>
+                <target>This board title is already in use.</target>
+            </trans-unit>
+            <trans-unit id="115">
+                <source>Either.you.can.change.the.title.of.your.topic.or.post.in.one.of.the.following.topics.</source>
+                <target>Either you can change the title of your topic or post in one of the following topics:</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

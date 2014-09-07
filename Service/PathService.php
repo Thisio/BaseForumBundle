@@ -16,6 +16,9 @@ namespace Teapotio\Base\ForumBundle\Service;
 use Teapotio\Base\ForumBundle\Entity\BoardInterface;
 use Teapotio\Base\ForumBundle\Entity\TopicInterface;
 
+use Teapotio\Base\ForumBundle\Exception\DuplicateBoardException;
+use Teapotio\Base\ForumBundle\Exception\DuplicateTopicException;
+
 use Symfony\Component\Security\Core\User\UserInterface;
 
 use Doctrine\Common\Collections\ArrayCollection;
@@ -160,6 +163,8 @@ class PathService extends BaseService
      * @param  BoardInterface  $board
      *
      * @return Board
+     *
+     * @throws DuplicateBoardException
      */
     protected function handleBoardPath(BoardInterface $board)
     {
@@ -177,7 +182,7 @@ class PathService extends BaseService
         foreach ($boards as $b) {
             // If another board within the parent's children has the same slug - then we modify
             if ($b->getSlug() === $board->getSlug() && $b->getId() !== $board->getId()) {
-                $this->dedupeBoardPath($board);
+                throw new DuplicateBoardException($b);
                 break;
             }
         }
@@ -188,14 +193,16 @@ class PathService extends BaseService
     /**
      * Function used for board path deduping
      *
+     * We decided to throw an exception instead so we can handle this scenario
+     * properly (ie. show an error message and have the user fix the title)
+     *
      * @param  BoardInterface  $board
+     * @param  array           $boards
      *
      * @return Board
      */
-    protected function dedupeBoardPath(BoardInterface $board)
+    protected function dedupeBoardPath(BoardInterface $board, $boards)
     {
-        $boards = $board->getParent()->getChildren();
-
         $boardSlugs = array();
 
         // list all the parent's children slugs into one array
@@ -214,31 +221,71 @@ class PathService extends BaseService
             $i++;
         } while (in_array($slug, $boardSlugs));
 
+        $board->setSlug($board->getSlug() . $i);
+
         return $board;
     }
 
     /**
-     * Handle paths before a given board is saved
+     * Handle paths before a given topic is saved
      *
-     * @param  BoardInterface $board
+     * @param  TopicInterface $board
      *
      * @return Board
      */
-    public function onTopicEdit(BoardInterface $board)
+    public function onTopicEdit(TopicInterface $topic)
     {
-
+        return $this->handleTopicPath($topic);
     }
 
     /**
-     * Handle paths when a given board is created
+     * Handle paths when a given topic is created
      *
-     * @param  BoardInterface $board
+     * @param  TopicInterface $board
      *
      * @return Board
      */
-    public function onTopicCreate(BoardInterface $board)
+    public function onTopicCreate(TopicInterface $topic)
     {
+        return $this->handleTopicPath($topic);
+    }
 
+    /**
+     * Check if a topic with the slug already exists
+     *
+     * @param  TopicInterface  $topic
+     *
+     * @return TopicInterface
+     *
+     * @throws DuplicateTopicException
+     */
+    protected function handleTopicPath(TopicInterface $topic)
+    {
+        // Get a list of topics by slug
+        $topicsBySlug = $this->container
+                             ->get('teapotio.forum.topic')
+                             ->getTopicsBySlug($topic->getSlug());
+
+        // Get a list of topics by slug
+        $topicsByTitle = $this->container
+                              ->get('teapotio.forum.topic')
+                              ->getTopicsByTitle($topic->getTitle());
+
+        $topics = array_merge($topicsBySlug, $topicsByTitle);
+
+        // Remove the topic from the array if we are editing
+        // the given topic
+        foreach ($topics as $key => $t) {
+            if ($t->getId() === $topic->getId()) {
+                unset($topics[$key]);
+            }
+        }
+
+        if (count($topics) !== 0) {
+            throw new DuplicateTopicException($topics);
+        }
+
+        return $topic;
     }
 
     /**

@@ -121,18 +121,25 @@ class TopicRepository extends EntityRepository
      * @param  BoardInterface   $board
      * @param  integer          $offset
      * @param  integer          $limit
+     * @param  boolean          $isDeleted
      *
      * @return \Doctrine\ORM\Tools\Pagination\Paginator
      */
-    public function getLatestTopicsByBoard(BoardInterface $board, $offset, $limit)
+    public function getLatestTopicsByBoard(BoardInterface $board, $offset, $limit, $isDeleted)
     {
-        $query = $this->createQueryBuilder('t')
-                      ->select(array('t'))
-                      ->where('t.board = :board')->setParameter('board', $board)
-                      ->orderBy('t.dateCreated', 'DESC')
-                      ->getQuery()
-                      ->setFirstResult($offset)
-                      ->setMaxResults($limit);
+        $queryBuilder = $this->createQueryBuilder('t')
+                             ->select(array('t'))
+                             ->where('t.board = :board')->setParameter('board', $board)
+                             ->orderBy('t.dateCreated', 'DESC');
+
+        if ($isDeleted !== null) {
+            $queryBuilder->andWhere('t.isDeleted = :isDeleted')
+                         ->setParameter('isDeleted', $isDeleted);
+        }
+
+        $query = $queryBuilder->getQuery()
+                              ->setFirstResult($offset)
+                              ->setMaxResults($limit);
 
         $paginator = new Paginator($query, false);
         return $paginator->setUseOutputWalkers(false);
