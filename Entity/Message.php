@@ -47,11 +47,11 @@ class Message implements MessageInterface
     protected $body;
 
     /**
-     * @var integer $totalStarred
+     * @var integer $totalStars
      *
-     * @ORM\Column(name="total_starred", type="integer")
+     * @ORM\Column(name="total_stars", type="integer")
      */
-    protected $totalStarred = 0;
+    protected $totalStars = 0;
 
     /**
      * @var \DateTime $dateCreated
@@ -161,13 +161,13 @@ class Message implements MessageInterface
     /**
      * Set total times the message was starred
      *
-     * @param integer $totalStarred
+     * @param integer $totalStars
      *
      * @return Message
      */
-    public function setTotalStarred($int)
+    public function setTotalStars($int)
     {
-        $this->totalStarred = $int;
+        $this->totalStars = $int;
 
         return $this;
     }
@@ -177,9 +177,9 @@ class Message implements MessageInterface
      *
      * @return integer
      */
-    public function getTotalStarred()
+    public function getTotalStars()
     {
-        return $this->totalStarred;
+        return $this->totalStars;
     }
 
     /**
@@ -189,9 +189,9 @@ class Message implements MessageInterface
      *
      * @return Message
      */
-    public function increaseTotalStarred($int = 1)
+    public function increaseTotalStars($int = 1)
     {
-        $this->totalStarred += $int;
+        $this->totalStars += $int;
 
         return $this;
     }
@@ -203,9 +203,9 @@ class Message implements MessageInterface
      *
      * @return  Message
      */
-    public function decreaseTotalStarred($int = 1)
+    public function decreaseTotalStars($int = 1)
     {
-        $this->totalStarred -= $int;
+        $this->totalStars -= $int;
 
         return $this;
     }

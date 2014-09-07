@@ -88,14 +88,24 @@ class MessageStarService extends BaseService
             $changed = true;
         }
 
+        // If the star exists but is deleted
+        // then undelete it instead of creating a new one
         if ($star->isDeleted() === true) {
             $star->setIsDeleted(false);
             $changed = true;
         }
 
+        // Changes were made so we must save
         if ($changed === true) {
-            $message->increaseTotalStarred();
+            $message->increaseTotalStars();
             $this->container->get('teapotio.forum.message')->save($message);
+
+            // If the message is the body of a topic then we increment the star
+            // count on the topic as well
+            if ($message->isTopicBody() === true) {
+              $message->getTopic()->increaseTotalStars();
+              $this->container->get('teapotio.forum.topic')->save($message->getTopic());
+            }
 
             $this->save($star);
         }
@@ -125,8 +135,15 @@ class MessageStarService extends BaseService
             }
 
             if ($changed === true) {
-                $message->decreaseTotalStarred();
+                $message->decreaseTotalStars();
                 $this->container->get('teapotio.forum.message')->save($message);
+
+                // If the message is the body of a topic then we decrement the star
+                // count on the topic as well
+                if ($message->isTopicBody() === true) {
+                  $message->getTopic()->decreaseTotalStars();
+                  $this->container->get('teapotio.forum.topic')->save($message->getTopic());
+                }
 
                 $this->save($star);
             }
@@ -196,7 +213,7 @@ class MessageStarService extends BaseService
         $tmpMessages = array();
 
         foreach ($messages as $m) {
-            if ($m->getTotalStarred() !== 0) {
+            if ($m->getTotalStars() !== 0) {
                 $tmpMessages[] = $m;
             }
             $return[$m->getId()] = new ArrayCollection();
@@ -245,7 +262,7 @@ class MessageStarService extends BaseService
         $tmpMessages = array();
 
         foreach ($messages as $m) {
-            if ($m->getTotalStarred() !== 0) {
+            if ($m->getTotalStars() !== 0) {
                 $tmpMessages[] = $m;
             }
         }

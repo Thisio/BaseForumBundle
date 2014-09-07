@@ -442,6 +442,14 @@
                 <source>Login.or.signup.if.you.would.like.to.post</source>
                 <target>Log in or sign up if you would like to post.</target>
             </trans-unit>
+            <trans-unit id="111">
+                <source>Star</source>
+                <target>Star</target>
+            </trans-unit>
+            <trans-unit id="112">
+                <source>Unstar</source>
+                <target>Unstar</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

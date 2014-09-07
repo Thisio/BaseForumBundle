@@ -103,6 +103,13 @@ class Topic implements TopicInterface
     protected $totalPosts = 0;
 
     /**
+     * @var integer $totalStars
+     *
+     * @ORM\Column(name="total_stars", type="integer")
+     */
+    protected $totalStars = 0;
+
+    /**
      * @var User $user
      */
     protected $user;
@@ -257,7 +264,7 @@ class Topic implements TopicInterface
      * Set lastMessageDate
      *
      * @param \DateTime $lastMessageDate
-     * @return TopicStat
+     * @return Topic
      */
     public function setLastMessageDate($lastMessageDate)
     {
@@ -333,7 +340,7 @@ class Topic implements TopicInterface
      *
      * @param integer $totalPosts
      *
-     * @return TopicStat
+     * @return Topic
      */
     public function setTotalPosts($int)
     {
@@ -376,6 +383,58 @@ class Topic implements TopicInterface
     public function decreaseTotalPosts($int = 1)
     {
         $this->totalPosts -= $int;
+
+        return $this;
+    }
+
+    /**
+     * Set total stars
+     *
+     * @param integer $totalStars
+     *
+     * @return Topic
+     */
+    public function setTotalStars($int)
+    {
+        $this->totalStars = $int;
+
+        return $this;
+    }
+
+    /**
+     * Get total stars
+     *
+     * @return integer
+     */
+    public function getTotalStars()
+    {
+        return $this->totalStars;
+    }
+
+    /**
+     * Increase the total of stars in the topic
+     *
+     * @param  integer $int = 1
+     *
+     * @return Topic
+     */
+    public function increaseTotalStars($int = 1)
+    {
+        $this->totalStars += $int;
+
+        return $this;
+    }
+
+    /**
+     * Decrease the total of stars in the topic
+     *
+     * @param  integer $int = 1
+     *
+     * @return  Topic
+     */
+    public function decreaseTotalStars($int = 1)
+    {
+        $this->totalStars -= $int;
 
         return $this;
     }
@@ -595,6 +654,16 @@ class Topic implements TopicInterface
     public function getShortTotalViews()
     {
         return $this->convertFormat($this->totalViews);
+    }
+
+    /**
+     * Get a short value of the number of views
+     *
+     * @return string
+     */
+    public function getShortTotalStars()
+    {
+        return $this->convertFormat($this->totalStars);
     }
 
     /**
