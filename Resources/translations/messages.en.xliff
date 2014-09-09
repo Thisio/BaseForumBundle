@@ -462,6 +462,10 @@
                 <source>Either.you.can.change.the.title.of.your.topic.or.post.in.one.of.the.following.topics.</source>
                 <target>Either you can change the title of your topic or post in one of the following topics:</target>
             </trans-unit>
+            <trans-unit id="116">
+                <source>%login%.or.%signup%.if.you.would.like.to.post</source>
+                <target>%login% or %signup% if you would like to post.</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
