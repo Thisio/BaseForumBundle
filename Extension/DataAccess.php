@@ -36,6 +36,7 @@ class DataAccess extends \Twig_Extension {
             "get_top_forum_users"         => new \Twig_Function_Method($this, 'getTopUsers'),
             "get_latest_moderations"      => new \Twig_Function_Method($this, 'getLatestModerations'),
             "get_latest_flags"            => new \Twig_Function_Method($this, 'getLatestFlags'),
+            "get_latest_topics"           => new \Twig_Function_Method($this, 'getLatestTopics'),
             "get_last_page"               => new \Twig_Function_Method($this, 'getLastPage'),
             "is_message_starred"          => new \Twig_Function_Method($this, 'isMessageStarred'),
             "is_message_starred_by_user"  => new \Twig_Function_Method($this, 'isMessageStarredByUser'),
@@ -65,6 +66,16 @@ class DataAccess extends \Twig_Extension {
     public function getLatestFlags($limit = 15)
     {
         return $this->container->get('teapotio.forum.flag')->getLatestFlags(0, $limit);
+    }
+
+    public function getLatestTopics($limit = 15, BoardInterface $board = null)
+    {
+        $topicService = $this->container->get('teapotio.forum.topic');
+        if ($board !== null) {
+            return $topicService->getLatestTopicsByBoard($board, 0, $limit);
+        } else {
+            return $topicService->getLatestTopics(0, $limit);
+        }
     }
 
     public function isMessageStarred($message)

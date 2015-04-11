@@ -466,6 +466,18 @@
                 <source>%login%.or.%signup%.if.you.would.like.to.post</source>
                 <target>%login% or %signup% if you would like to post.</target>
             </trans-unit>
+            <trans-unit id="117">
+                <source>List.of.topics</source>
+                <target>List of topics</target>
+            </trans-unit>
+            <trans-unit id="118">
+                <source>Latest.topics</source>
+                <target>Latest topics</target>
+            </trans-unit>
+            <trans-unit id="119">
+                <source>Latest.topics.in.board</source>
+                <target>Latest topics in board</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
