@@ -157,11 +157,6 @@ class Board implements BoardInterface
     protected $user;
 
     /**
-     * @var \Teapotio\Base\ForumBundle\Entity\BoardStat $stat
-     */
-    protected $stat;
-
-    /**
      * @var ArrayCollection $topics
      */
     protected $topics;
