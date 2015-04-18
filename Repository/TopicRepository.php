@@ -47,6 +47,36 @@ class TopicRepository extends EntityRepository
     }
 
     /**
+     * Get a Topic entity by a given topic slug and board
+     *
+     * @param  string          $topicSlug
+     * @param  BoardInterface  $board
+     * @param  boolean         $deleted = false
+     *
+     * @return Topic|null
+     */
+    public function getBySlugAndByBoard($topicSlug, BoardInterface $board, $deleted = false)
+    {
+        $queryBuilder = $this->createQueryBuilder('t')
+                             ->select(array('t'))
+                             ->where('t.board = :board')->setParameter('board', $board)
+                             ->andWhere('t.slug = :slug')->setParameter('slug', $topicSlug);
+
+        if ($deleted !== null) {
+            $queryBuilder->andWhere('t.isDeleted = :isDeleted')
+                         ->setParameter('isDeleted', $deleted);
+        }
+
+        $query = $queryBuilder->getQuery();
+
+        try {
+            return $query->getSingleResult();
+        } catch (\Doctrine\Orm\NoResultException $e) {
+            return null;
+        }
+    }
+
+    /**
      * Get the latest topics in general
      *
      * @param  integer  $offset

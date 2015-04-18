@@ -439,11 +439,40 @@ class BoardService extends BaseService
      *
      * @return integer
      */
-    public function switchBoardParent(BoardInterface $original, BoardInterface $destination)
+    protected function switchChildrenBoardParent(BoardInterface $original, BoardInterface $destination)
     {
-        return $this->em
-                    ->getRepository($this->boardRepositoryClass)
-                    ->switchBoardParent($original, $destination);
+        $count = 0;
+
+        foreach ($original->getChildren() as $b) {
+            $count += $this->setBoardDepthRecursively($b, $destination->getDepth() + 1);
+
+            $b->setParent($destination);
+        }
+
+        return $count;
+    }
+
+    /**
+     * Fixes the depth of a given board and its children
+     *
+     * @param  BoardInterface  $board
+     * @param  integer         $depth = 1   the depth of given board
+     * @param  integer         $count = 0   the number of board affected
+     *
+     * @return integer  the number of board affected in this function stack
+     */
+    protected function setBoardDepthRecursively(BoardInterface $board, $depth = 1, $count = 0)
+    {
+        $board->setDepth($depth);
+        $this->em->persist($board);
+
+        $count++;
+
+        foreach ($board->getChildren() as $b) {
+            $count = $this->setBoardDepthRecursively($b, $depth + 1, $count);
+        }
+
+        return $count;
     }
 
     /**
@@ -490,9 +519,32 @@ class BoardService extends BaseService
         return $this;
     }
 
+
+    /**
+     * Move the original board into a destination board
+     *
+     * @param  BoardInterface  $original
+     * @param  BoardInterface  $destination
+     *
+     * @throws \Teapotio\Base\ForumBundle\Exception\InvalidBoardException
+     */
     public function moveBoard(BoardInterface $original, BoardInterface $destination)
     {
+        // Rehydrate the boards
+        $this->em->refresh($original);
+        $this->em->refresh($destination);
 
+        // Base logic for moving content
+        $this->moveBase($original, $destination);
+
+        // Move boards
+        $original->setParent($destination);
+
+        // Fixes the depth of the original board and its children
+        $this->setBoardDepthRecursively($original, $destination->getDepth() + 1);
+
+        // Save the original board
+        $this->save($original);
     }
 
     /**
@@ -504,6 +556,35 @@ class BoardService extends BaseService
      * @throws \Teapotio\Base\ForumBundle\Exception\InvalidBoardException
      */
     public function moveContent(BoardInterface $original, BoardInterface $destination)
+    {
+        // Rehydrate the boards
+        $this->em->refresh($original);
+        $this->em->refresh($destination);
+
+        // Base logic for moving content
+        $this->moveBase($original, $destination);
+
+        // Move topics
+        $this->container
+             ->get('teapotio.forum.topic')
+             ->moveFromBoardToBoard($original, $destination);
+
+        // Move boards
+        $this->switchChildrenBoardParent($original, $destination);
+
+        $this->em->flush();
+    }
+
+
+    /**
+     * Base logic for moving content from a board to another
+     *
+     * @param  BoardInterface  $original
+     * @param  BoardInterface  $destination
+     *
+     * @throws \Teapotio\Base\ForumBundle\Exception\InvalidBoardException
+     */
+    private function moveBase(BoardInterface $original, BoardInterface $destination)
     {
         if ($original->getId() === $destination->getId()) {
             throw new \Teapotio\Base\ForumBundle\Exception\InvalidBoardException();
@@ -523,22 +604,12 @@ class BoardService extends BaseService
 
         $outOfScope = true;
         if ($original->getParent() !== null) {
-           $outOfScope = $this->recurciveMoveNegation($original->getParent(), $destination, $posts, $topics);
+            $outOfScope = $this->recurciveMoveNegation($original->getParent(), $destination, $posts, $topics);
         }
 
         if ($outOfScope === true) {
             $this->recurciveMoveAddition($destination, $posts, $topics);
         }
-
-        // Move topics
-        $this->container
-             ->get('teapotio.forum.topic')
-             ->moveFromBoardToBoard($original, $destination);
-
-        // Move boards
-        $this->switchBoardParent($original, $destination);
-
-        $this->em->flush();
     }
 
     /**

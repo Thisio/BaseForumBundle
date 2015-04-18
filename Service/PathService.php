@@ -59,7 +59,7 @@ class PathService extends BaseService
      */
     public function getBoardParameters(BoardInterface $board)
     {
-        $useId = $this->container->getParameter('teapotio.forum.url.use_id');
+        $useId = $this->container->getParameter('teapotio.forum.url.use_board_id');
 
         $parameters = array(
             'boardSlug' => $this->container->get('teapotio.forum.board')->buildSlug($board)
@@ -261,6 +261,13 @@ class PathService extends BaseService
      */
     protected function handleTopicPath(TopicInterface $topic)
     {
+        // If we use an ID in the URL then the slug doesn't need to be unique
+        $useId = $this->container->getParameter('teapotio.forum.url.use_topic_id');
+
+        if ($useId === true) {
+          return $topic;
+        }
+
         // Get a list of topics by slug
         $topicsBySlug = $this->container
                              ->get('teapotio.forum.topic')
@@ -271,12 +278,14 @@ class PathService extends BaseService
                               ->get('teapotio.forum.topic')
                               ->getTopicsByTitle($topic->getTitle());
 
-        $topics = array_merge($topicsBySlug, $topicsByTitle);
+        $topics = array_unique(array_merge($topicsBySlug, $topicsByTitle));
 
         // Remove the topic from the array if we are editing
-        // the given topic
+        // the given topic and if the given topic is in the same
+        // folder as potential duplicates
         foreach ($topics as $key => $t) {
-            if ($t->getId() === $topic->getId()) {
+            if ($t->getId() === $topic->getId()
+                || $t->getBoard()->getId() !== $topic->getBoard()->getId()) {
                 unset($topics[$key]);
             }
         }
@@ -297,7 +306,7 @@ class PathService extends BaseService
      */
     public function getTopicParameters(TopicInterface $topic)
     {
-        $useId = $this->container->getParameter('teapotio.forum.url.use_id');
+        $useId = $this->container->getParameter('teapotio.forum.url.use_topic_id');
 
         $parameters = array(
             'topicSlug' => $topic->getSlug()

@@ -39,8 +39,6 @@ class MainService extends BaseService
      */
     public function forumPath($routeName, $entity = null)
     {
-        $useId = $this->container->getParameter('teapotio.forum.url.use_id');
-
         $parameters = array();
         $board = null;
         $topic = null;

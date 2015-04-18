@@ -159,11 +159,6 @@ class MessageService extends BaseService
                      ->get('teapotio.forum.topic')
                      ->incrementTotalPosts($message->getTopic());
 
-                /**
-                 * Update the last message of topic
-                 */
-                $message->getTopic()->setLastMessageDate(new \DateTime());
-
                 // Get the user stat
                 $userStat = $this->container
                                  ->get('teapotio.forum.user_stat')
@@ -181,6 +176,9 @@ class MessageService extends BaseService
                      ->get('teapotio.forum.board')
                      ->incrementStatTopics($message->getTopic()->getBoard());
             }
+
+            // Update the last message date of topic
+            $message->getTopic()->setLastMessageDate(new \DateTime());
 
             // should start by 1 (for new topic)
             $message->setPosition($message->getTopic()->getTotalPosts());

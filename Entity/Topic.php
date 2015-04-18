@@ -144,6 +144,11 @@ class Topic implements TopicInterface
         $this->messages = new ArrayCollection();
     }
 
+    public function __toString()
+    {
+        return (string)$this->getId();
+    }
+
     /**
      * Get id
      *

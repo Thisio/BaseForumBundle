@@ -61,6 +61,20 @@ class TopicService extends BaseService
     }
 
     /**
+     * Get a Topic entity by a given topic slug and board
+     *
+     * @param  string  $topicSlug
+     *
+     * @return Topic|null
+     */
+    public function getBySlugAndByBoard($topicSlug, BoardInterface $board)
+    {
+        return $this->em
+                    ->getRepository($this->topicRepositoryClass)
+                    ->getBySlugAndByBoard($topicSlug, $board);
+    }
+
+    /**
      * Get a list of topics by a given topic slug
      *
      * @param  string  $topicTitle

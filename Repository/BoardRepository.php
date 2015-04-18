@@ -218,22 +218,4 @@ class BoardRepository extends EntityRepository
         return $paginator->setUseOutputWalkers(false);
     }
 
-    /**
-     * Change the parent board of all boards that has $original as a parent
-     *
-     * @param  BoardInterface  $source
-     * @param  BoardInterface  $destination
-     *
-     * @return integer
-     */
-    public function switchBoardParent(BoardInterface $source, BoardInterface $destination)
-    {
-        return $this->createQueryBuilder('b')
-            ->update($this->getEntityName(), 'b')
-            ->set('b.parent', $destination->getId())
-            ->where('b.parent = :source')->setParameter('source', $source->getId())
-            ->getQuery()
-            ->execute();
-    }
-
 }

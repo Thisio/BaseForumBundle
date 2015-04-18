@@ -167,6 +167,11 @@ class Board implements BoardInterface
         $this->children = new ArrayCollection();
     }
 
+    public function __toString()
+    {
+        return (string)$this->getId();
+    }
+
     /**
      * A series of methods to be called to fully unserialize the class
      */

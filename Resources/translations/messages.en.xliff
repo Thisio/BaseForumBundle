@@ -478,6 +478,18 @@
                 <source>Latest.topics.in.board</source>
                 <target>Latest topics in board</target>
             </trans-unit>
+            <trans-unit id="120">
+                <source>%total% topics</source>
+                <target>%total% topics</target>
+            </trans-unit>
+            <trans-unit id="121">
+                <source>%total% messages</source>
+                <target>%total% messages</target>
+            </trans-unit>
+            <trans-unit id="122">
+                <source>There.are.conflicting.board.names.</source>
+                <target>There are conflicting board names.</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
