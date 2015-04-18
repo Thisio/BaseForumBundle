@@ -384,7 +384,7 @@ class AccessPermissionService extends BaseService
     public function canCreateMessage(UserInterface $user = null, BoardInterface $board = null)
     {
         // Super admin and admin can do all-the-things
-        if ($this->isSuperAdmin($user) === true || $this->isAdmin($user) === true) {
+        if ($this->isSuperAdmin($user) === true) {
             return true;
         }
 
@@ -410,7 +410,7 @@ class AccessPermissionService extends BaseService
     public function canCreateTopic(UserInterface $user = null, BoardInterface $board = null)
     {
         // Super admin and admin can do all-the-things
-        if ($this->isSuperAdmin($user) === true || $this->isAdmin($user) === true) {
+        if ($this->isSuperAdmin($user) === true) {
             return true;
         }
 
@@ -440,7 +440,7 @@ class AccessPermissionService extends BaseService
     public function canCreateBoard(UserInterface $user = null, BoardInterface $board = null)
     {
         // Super admin and admin can do all-the-things
-        if ($this->isSuperAdmin($user) === true || $this->isAdmin($user) === true) {
+        if ($this->isSuperAdmin($user) === true) {
             return true;
         }
 
@@ -466,7 +466,7 @@ class AccessPermissionService extends BaseService
     public function canView(UserInterface $user = null, $entity)
     {
         // Super admin and admin can do all-the-things
-        if ($this->isSuperAdmin($user) === true || $this->isAdmin($user) === true) {
+        if ($this->isSuperAdmin($user) === true) {
             return true;
         }
 
