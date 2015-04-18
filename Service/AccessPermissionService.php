@@ -65,11 +65,17 @@ class AccessPermissionService extends BaseService
         // go through each board and its children recursively
         foreach ($boards as $board) {
             $this->setPermissionsOnBoardFromNormalizedData($board, $groupId, $data);
+        }
 
+        // reprocess for the view permission
+        foreach ($boards as $board) {
             // Replicate the permission to the children
-            foreach ($board->getChildren() as $b) {
-                $this->replicateViewPermission($board, $b, $groupId);
-            }
+            /**
+             * @todo why is this needed??? seems broken.
+             */
+            // foreach ($board->getChildren() as $b) {
+            //     $this->replicateViewPermission($board, $b, $groupId);
+            // }
 
             // Replicate the view permission to the parent (only if the value is true)
             $this->replicateViewPermissionToParents($board, $board->getParent(), $groupId);
@@ -92,6 +98,8 @@ class AccessPermissionService extends BaseService
         $permissionChanged = false;
 
         $permissions = $board->getPermissions();
+
+        $permissions[$groupId] = array();
 
         // if there are no data for the given board we reset the permissions
         // if the permissions aren't empty empty we don't need to process anything

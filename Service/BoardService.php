@@ -461,7 +461,7 @@ class BoardService extends BaseService
      *
      * @return integer  the number of board affected in this function stack
      */
-    protected function setBoardDepthRecursively(BoardInterface $board, $depth = 1, $count = 0)
+    public function setBoardDepthRecursively(BoardInterface $board, $depth = 1, $count = 0)
     {
         $board->setDepth($depth);
         $this->em->persist($board);
