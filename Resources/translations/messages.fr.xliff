@@ -4,15 +4,15 @@
         <body>
             <trans-unit id="1">
                 <source>Topic.by</source>
-                <target>Topic by</target>
+                <target>Sujet de</target>
             </trans-unit>
             <trans-unit id="2">
                 <source>Last.message.by</source>
-                <target>Last message by</target>
+                <target>Dernier message de</target>
             </trans-unit>
             <trans-unit id="3">
                 <source>By</source>
-                <target>By</target>
+                <target>par</target>
             </trans-unit>
             <trans-unit id="4">
                 <source>Forum</source>
@@ -20,119 +20,119 @@
             </trans-unit>
             <trans-unit id="5">
                 <source>New.message</source>
-                <target>New message</target>
+                <target>Nouveau message</target>
             </trans-unit>
             <trans-unit id="6">
                 <source>Add.a.new.message</source>
-                <target>Click here and start typing your message.</target>
+                <target>Cliquez ici et commencez à saisir votre message.</target>
             </trans-unit>
             <trans-unit id="7"> <!-- Used for an anchor, don't use spaces -->
                 <source>bottom</source>
-                <target>bottom</target>
+                <target>bas</target>
             </trans-unit>
             <trans-unit id="8">
                 <source>New.topic</source>
-                <target>New topic</target>
+                <target>Nouveau sujet</target>
             </trans-unit>
             <trans-unit id="9">
                 <source>Type.title</source>
-                <target>Write a nice title</target>
+                <target>Ecrivez un titre sympa</target>
             </trans-unit>
             <trans-unit id="10">
                 <source>With.a.message</source>
-                <target>With a nice message</target>
+                <target>Avec un message sympa</target>
             </trans-unit>
             <trans-unit id="11">
                 <source>Cancel</source>
-                <target>Cancel</target>
+                <target>Annuler</target>
             </trans-unit>
             <trans-unit id="12">
                 <source>Boards</source>
-                <target>Boards</target>
+                <target>Catégories</target>
             </trans-unit>
             <trans-unit id="13">
                 <source>New.board</source>
-                <target>New board</target>
+                <target>Nouvelle catégorie</target>
             </trans-unit>
             <trans-unit id="14">
                 <source>Popular.boards</source>
-                <target>Popular boards</target>
+                <target>Catégories populaires</target>
             </trans-unit>
             <trans-unit id="15">
                 <source>Create.board</source>
-                <target>Create board</target>
+                <target>Créer une catégorie</target>
             </trans-unit>
             <trans-unit id="16">
                 <source>Edit.board</source>
-                <target>Edit board</target>
+                <target>Modifier une catégorie</target>
             </trans-unit>
             <trans-unit id="17">
                 <source>Edit.board.data</source>
-                <target>Edit board data</target>
+                <target>Modifier les données d'une catégorie</target>
             </trans-unit>
             <trans-unit id="18">
                 <source>Move.topics.and.delete.board</source>
-                <target>Move topics and delete board</target>
+                <target>Déplace les sujets et supprimer la catégorie</target>
             </trans-unit>
             <trans-unit id="19">
                 <source>Move.topics.and.delete.board.notice</source>
-                <target>Before deleting a board you need to move its content. Pick the board you want to move the content to and click on the delete button.</target>
+                <target>Avant de supprimer une catégorie, vous devez déplacer son contenu. Sélectionner la catégorie dans laquelle vous souhaitez déplacer le contenu puis cliquez sur le bouton "Supprimer".</target>
             </trans-unit>
             <trans-unit id="20">
                 <source>Delete</source>
-                <target>Delete</target>
+                <target>Supprimer</target>
             </trans-unit>
             <trans-unit id="21">
                 <source>Move.to</source>
-                <target>Move to</target>
+                <target>Déplacer vers</target>
             </trans-unit>
             <trans-unit id="22">
                 <source>and</source>
-                <target>and</target>
+                <target>et</target>
             </trans-unit>
             <trans-unit id="23">
                 <source>Move.content.to</source>
-                <target>Move content to</target>
+                <target>Déplacer le contenu vers</target>
             </trans-unit>
             <trans-unit id="24">
                 <source>Create.board.in.notice</source>
-                <target>You are about to create a board in board_name.</target>
+                <target>Vous allez créer une catégorie dans board_name.</target>
             </trans-unit>
             <trans-unit id="25">
                 <source>Create.board.at.the.main.level.notice</source>
-                <target>You are about to create a board at the top level.</target>
+                <target>Vous allez créer une catégorie de premier niveau.</target>
             </trans-unit>
             <trans-unit id="26">
                 <source>Cannot.move.content.to.children</source>
-                <target>You can't move the content into the same board or into the selected board's children.</target>
+                <target>Vous ne pouvez pas déplacer un contenu dans sa propre catégorie, ou dans la sous-catégorie de celle sélectionnée.</target>
             </trans-unit>
             <trans-unit id="27">
                 <source>Board.not.found</source>
-                <target>Board is not found.</target>
+                <target>La catégorie n'a pas été trouvée.</target>
             </trans-unit>
             <trans-unit id="28">
                 <source>Board.selected.not.valid</source>
-                <target>The selected board is not valid.</target>
+                <target>La catégorie sélectionnée n'est pas valide.</target>
             </trans-unit>
             <trans-unit id="29">
                 <source>Move.board</source>
-                <target>Move board</target>
+                <target>Déplacer la catégorie.</target>
             </trans-unit>
             <trans-unit id="30">
                 <source>Move.board.to</source>
-                <target>Move board to</target>
+                <target>Déplacer la catégorie vers</target>
             </trans-unit>
             <trans-unit id="31">
                 <source>Move</source>
-                <target>Move</target>
+                <target>Déplacer</target>
             </trans-unit>
             <trans-unit id="32">
                 <source>Undelete</source>
-                <target>Undelete</target>
+                <target>Rétablir</target>
             </trans-unit>
             <trans-unit id="33">
                 <source>Pin</source>
-                <target>Pin</target>
+                <target>Epingler</target>
             </trans-unit>
             <trans-unit id="34">
                 <source>Unpin</source>
@@ -140,47 +140,47 @@
             </trans-unit>
             <trans-unit id="35">
                 <source>Topic</source>
-                <target>Topic</target>
+                <target>Sujet</target>
             </trans-unit>
             <trans-unit id="36">
                 <source>Board</source>
-                <target>Board</target>
+                <target>Catégorie</target>
             </trans-unit>
             <trans-unit id="37">
                 <source>Lock</source>
-                <target>Lock</target>
+                <target>Verrouiller</target>
             </trans-unit>
             <trans-unit id="38">
                 <source>Unlock</source>
-                <target>Unlock</target>
+                <target>Déverrouiller</target>
             </trans-unit>
             <trans-unit id="39">
                 <source>Permissions</source>
-                <target>Permissions</target>
+                <target>Autorisations</target>
             </trans-unit>
             <trans-unit id="40">
                 <source>Top.forum.users</source>
-                <target>Top forum users</target>
+                <target>Meilleurs utilisateurs du forum</target>
             </trans-unit>
             <trans-unit id="41">
                 <source>Expand</source>
-                <target>Expand</target>
+                <target>Etendre</target>
             </trans-unit>
             <trans-unit id="42">
                 <source>Latest.created.topics</source>
-                <target>Latest created topics</target>
+                <target>Sujets dernièrements créés</target>
             </trans-unit>
             <trans-unit id="43">
                 <source>List.of.boards</source>
-                <target>List of boards</target>
+                <target>Liste des catégories</target>
             </trans-unit>
             <trans-unit id="44">
                 <source>Latest.moderation</source>
-                <target>Latest moderation</target>
+                <target>Dernière modération</target>
             </trans-unit>
             <trans-unit id="45">
                 <source>pinned</source>
-                <target>pinned</target>
+                <target>Epinglé</target>
             </trans-unit>
             <trans-unit id="46">
                 <source>unpinned</source>
@@ -188,91 +188,91 @@
             </trans-unit>
             <trans-unit id="47">
                 <source>locked</source>
-                <target>locked</target>
+                <target>Verrouillé</target>
             </trans-unit>
             <trans-unit id="48">
                 <source>unlocked</source>
-                <target>unlocked</target>
+                <target>Déverrouillé</target>
             </trans-unit>
             <trans-unit id="49">
                 <source>deleted</source>
-                <target>deleted</target>
+                <target>Supprimé</target>
             </trans-unit>
             <trans-unit id="50">
                 <source>undeleted</source>
-                <target>undeleted</target>
+                <target>Rétabli</target>
             </trans-unit>
             <trans-unit id="51">
                 <source>a.message</source>
-                <target>a message</target>
+                <target>un message</target>
             </trans-unit>
             <trans-unit id="52">
                 <source>a.topic</source>
-                <target>a topic</target>
+                <target>un sujet</target>
             </trans-unit>
             <trans-unit id="53">
                 <source>a.board</source>
-                <target>a board</target>
+                <target>une catégorie</target>
             </trans-unit>
             <trans-unit id="54">
                 <source>Latest.flags.risen</source>
-                <target>Latest flags risen</target>
+                <target>Derniers signalements</target>
             </trans-unit>
             <trans-unit id="55">
                 <source>flagged</source>
-                <target>flagged</target>
+                <target>signalé</target>
             </trans-unit>
             <trans-unit id="56">
                 <source>flagged</source>
-                <target>flagged</target>
+                <target>signalé</target>
             </trans-unit>
             <trans-unit id="57">
                 <source>View</source>
-                <target>View</target>
+                <target>Visibilité</target>
             </trans-unit>
             <trans-unit id="58">
                 <source>Create</source>
-                <target>Create</target>
+                <target>Créer</target>
             </trans-unit>
             <trans-unit id="59">
                 <source>Edit</source>
-                <target>Edit</target>
+                <target>Editer</target>
             </trans-unit>
             <trans-unit id="60">
                 <source>Pick.the.permissions.for</source>
-                <target>Pick the permissions for</target>
+                <target>Sélectionner les permissions pour</target>
             </trans-unit>
             <trans-unit id="61">
                 <source>Pick.a.group</source>
-                <target>Pick a group</target>
+                <target>Sélectionner un groupe</target>
             </trans-unit>
             <trans-unit id="62">
                 <source>Like</source>
-                <target>Like</target>
+                <target>J'aime</target>
             </trans-unit>
             <trans-unit id="63">
                 <source>Deleted</source>
-                <target>Deleted</target>
+                <target>Supprimé</target>
             </trans-unit>
             <trans-unit id="64">
                 <source>Locked</source>
-                <target>Locked</target>
+                <target>Verrouillé</target>
             </trans-unit>
             <trans-unit id="65">
                 <source>Pinned</source>
-                <target>Pinned</target>
+                <target>Epinglé</target>
             </trans-unit>
             <trans-unit id="66">
                 <source>Pick.the.permissions.for.the.group</source>
-                <target>Pick the permissions for the group</target>
+                <target>Sélectionner les permissions pour le groupe</target>
             </trans-unit>
             <trans-unit id="67">
                 <source>Pick.the.permissions.explanation</source>
-                <target>Apply some permissions to the group by clicking on the checkboxes and submit the changes using the save button. Clicking on "Apply to children" will apply the permissions to the boards within the selected parent board.</target>
+                <target>Appliquez les permissions pour le groupe grâce aux cases à cocher et validez les modifications avec le bouton "Sauvegarder". Cliquer sur "Appliquer aux sous-groupes" appliquera les autorisations aux sous-catégories de celle sélectionnée.</target>
             </trans-unit>
             <trans-unit id="68">
                 <source>Pick.the.permissions.explanation.second</source>
-                <target>"View" defines that users in the group can view the topics and messages within the board. "Create" defines that users can create a topic or a message. "Edit" defines that users can edit their own topics and messages. "Delete" defines that users can delete their own topics and messages.</target>
+                <target>"Visibilité" permet aux utilisateurs du groupe de voir les sujets et leurs messages à l'intérieur de la catégorie. "Créer" permet aux utilisateurs de créer un sujet ou un message. "Editer" permet aux utilisateurs de modifier leurs propre sujets et messages. "Supprimer" permet aux utilisateurs de supprimer leurs propre sujets et messages.</target>
             </trans-unit>
             <trans-unit id="69">
                 <source>Misc</source>
@@ -280,111 +280,111 @@
             </trans-unit>
             <trans-unit id="70">
                 <source>Submit</source>
-                <target>Submit</target>
+                <target>Valider</target>
             </trans-unit>
             <trans-unit id="71">
                 <source>All.topics.in.%title%</source>
-                <target>All topics in "%title%"</target>
+                <target>Tous les sujets de "%title%"</target>
             </trans-unit>
             <trans-unit id="72">
                 <source>All.topics</source>
-                <target>All topics</target>
+                <target>Tous les sujets</target>
             </trans-unit>
             <trans-unit id="73">
                 <source>Messages.in.%title%</source>
-                <target>Messages in "%title%"</target>
+                <target>Messages dans "%title%"</target>
             </trans-unit>
             <trans-unit id="74">
                 <source>Create.a.new.board.in.%title%</source>
-                <target>Create a new board in %title%</target>
+                <target>Créer une nouvelle catégorie dans %title%</target>
             </trans-unit>
             <trans-unit id="75">
                 <source>New.topic.in.%title%</source>
-                <target>New topic in %title%</target>
+                <target>Nouveau sujet dans %title%</target>
             </trans-unit>
             <trans-unit id="76">
                 <source>Manage.group.permissions</source>
-                <target>Manage group permissions</target>
+                <target>Gérer les autorisations du groupe</target>
             </trans-unit>
             <trans-unit id="77">
                 <source>Access.is.restricted</source>
-                <target>Access is restricted</target>
+                <target>L'accès est restreint</target>
             </trans-unit>
             <trans-unit id="78">
                 <source>The.message.below.was.flagged.%total%.times</source>
-                <target>The message below was flagged %total% times.</target>
+                <target>Le message suivant a été signalé %total% fois.</target>
             </trans-unit>
             <trans-unit id="79">
                 <source>You.have.access.to.this.page.because.you.were.granted.some.special.rights</source>
-                <target>You have access to this page because you were granted some special rights.</target>
+                <target>Vous avez accès à cette page grâce à des droits qui vont ont été spécifiquement donnés.</target>
             </trans-unit>
             <trans-unit id="80">
                 <source>As.an.admin.you.have.access.to.extra.tools</source>
-                <target>As an admin you have access to extra tools.</target>
+                <target>En tant qu'admin, vous avez accès à des outils supplémentaires.</target>
             </trans-unit>
             <trans-unit id="81">
                 <source>You.have.enough.rights.to.modify.this.user</source>
-                <target>You have enough rights to modify this user.</target>
+                <target>Vous avez suffisamment de droits pour modifier cet utilisateur.</target>
             </trans-unit>
             <trans-unit id="82">
                 <source>Edit.%title%</source>
-                <target>Edit %title%</target>
+                <target>Editer %title%</target>
             </trans-unit>
             <trans-unit id="83">
                 <source>Create.a.new.board</source>
-                <target>Create a new board</target>
+                <target>Créer une nouveau catégorie</target>
             </trans-unit>
             <trans-unit id="84">
                 <source>This.board.name.may.already.be.used</source>
-                <target>This board's name may already be used</target>
+                <target>Ce nom de catégorie est déjà utilisé.</target>
             </trans-unit>
             <trans-unit id="85">
                 <source>The.board.url.is.created.based.on.the.short.title</source>
-                <target>The board's URL is created based on the short title.</target>
+                <target>L'URL de la catégorie est créé en fonction de son titre court.</target>
             </trans-unit>
             <trans-unit id="86">
                 <source>Access.permissions</source>
-                <target>Access permissions</target>
+                <target>Autorisations d'accès</target>
             </trans-unit>
             <trans-unit id="87">
                 <source>Top.users</source>
-                <target>Top users</target>
+                <target>Meilleurs utilisateurs</target>
             </trans-unit>
             <trans-unit id="88">
                 <source>Latest.flags</source>
-                <target>Latest flags</target>
+                <target>Derniers signalements</target>
             </trans-unit>
             <trans-unit id="89">
                 <source>Collapse</source>
-                <target>Collapse</target>
+                <target>Réduire</target>
             </trans-unit>
             <trans-unit id="90">
                 <source>Expand.all</source>
-                <target>Expand all</target>
+                <target>Etendre toutall</target>
             </trans-unit>
             <trans-unit id="91">
                 <source>Collapse.all</source>
-                <target>Collapse all</target>
+                <target>Réduire tout</target>
             </trans-unit>
             <trans-unit id="92">
                 <source>Edit.message</source>
-                <target>Edit message</target>
+                <target>Editer le message</target>
             </trans-unit>
             <trans-unit id="93">
                 <source>Create.topic.in.notice</source>
-                <target>You are about to create a topic in %board_name%.</target>
+                <target>Vous allez créer un sujet dans %board_name%.</target>
             </trans-unit>
             <trans-unit id="94">
                 <source>Create.topic</source>
-                <target>Create topic</target>
+                <target>Créer le sujet</target>
             </trans-unit>
             <trans-unit id="95">
                 <source>The.content.is.restricted.to.guests.please.log.in.or.register.a.new.account</source>
-                <target>The content is restricted to guests, please log in or register a new account.</target>
+                <target>Le contenu est restreint pour les inconnus, merci de vous connecter ou de créer un nouveau compte.</target>
             </trans-unit>
             <trans-unit id="96">
                 <source>Flags</source>
-                <target>Flags</target>
+                <target>Signalements</target>
             </trans-unit>
             <trans-unit id="97">
                 <source>Moderations</source>
@@ -392,95 +392,95 @@
             </trans-unit>
             <trans-unit id="98">
                 <source>Edit.topic.%title%</source>
-                <target>Edit topic "%title%"</target>
+                <target>Editer le sujet "%title%"</target>
             </trans-unit>
             <trans-unit id="99">
                 <source>Edit.topic</source>
-                <target>Edit topic</target>
+                <target>Editer le sujet</target>
             </trans-unit>
             <trans-unit id="100">
                 <source>Short.reminder</source>
-                <target>Short reminder</target>
+                <target>Petit rappel</target>
             </trans-unit>
             <trans-unit id="101">
                 <source>Be.respectful.towards.others</source>
-                <target>Be respectful towards others.</target>
+                <target>Soyez respectueux envers les autres utilisateurs.</target>
             </trans-unit>
             <trans-unit id="102">
                 <source>Personal.attack.racism.discrimination.profanity.and.impersonation.are.strictly.prohibited</source>
-                <target>Personal attack, racism, discrimination, profanity and impersonation are strictly prohibited.</target>
+                <target>Les attaques personnelles, propros racistes ou discriminatoires, les profanations et  proprofanity and impostures sont strictement interdits.</target>
             </trans-unit>
             <trans-unit id="103">
                 <source>Spamming.and.trolling.are.prohibited</source>
-                <target>Spamming and trolling are prohibited.</target>
+                <target>Les spamm et troll sont interdits.</target>
             </trans-unit>
             <trans-unit id="104">
                 <source>Pick.a.board</source>
-                <target>Pick a board</target>
+                <target>Sélectionnez une catégorie</target>
             </trans-unit>
             <trans-unit id="105">
                 <source>in.%title%</source>
-                <target>in %title%</target>
+                <target>dans %title%</target>
             </trans-unit>
             <trans-unit id="106">
                 <source>List.of.flags</source>
-                <target>List of flags</target>
+                <target>Liste des signalements</target>
             </trans-unit>
             <trans-unit id="107">
                 <source>List.of.moderations</source>
-                <target>List of moderations</target>
+                <target>Liste des modérations</target>
             </trans-unit>
             <trans-unit id="108">
                 <source>The.message.below.was.flagged.%total%.times.and.has.been.deleted.by.%username%</source>
-                <target>The message below was flagged %total% times and has been deleted by %username%.</target>
+                <target>Le message ci-dessous a été signalé %total% fois et a été supprimé par %username%.</target>
             </trans-unit>
             <trans-unit id="109">
                 <source>The.view.permission.will.be.replicated.to.parent.boards.and.children</source>
-                <target>The "View" permission will be replicated to the parent boards and children.</target>
+                <target>L'autorisation "Visibilité" sera répétée aux catégories supérieures et inférieures.</target>
             </trans-unit>
             <trans-unit id="110">
                 <source>Login.or.signup.if.you.would.like.to.post</source>
-                <target>Log in or sign up if you would like to post.</target>
+                <target>Connectez-vous ou inscrivez-vous si vous voulez répondre.</target>
             </trans-unit>
             <trans-unit id="111">
                 <source>Star</source>
-                <target>Star</target>
+                <target>Favoris</target>
             </trans-unit>
             <trans-unit id="112">
                 <source>Unstar</source>
-                <target>Unstar</target>
+                <target>Retirer des favoris</target>
             </trans-unit>
             <trans-unit id="113">
                 <source>Topic.title.is.already.in.use</source>
-                <target>This topic title is already in use.</target>
+                <target>Le titre de sujet est déjà utilisé.</target>
             </trans-unit>
             <trans-unit id="114">
                 <source>Board.title.is.already.in.use</source>
-                <target>This board title is already in use.</target>
+                <target>Ce nom de catégorie est déjà utilisé.</target>
             </trans-unit>
             <trans-unit id="115">
                 <source>Either.you.can.change.the.title.of.your.topic.or.post.in.one.of.the.following.topics.</source>
-                <target>Either you can change the title of your topic or post in one of the following topics:</target>
+                <target>Vous pouvez soit changer le titre de votre sujet, soit écrire dans l'un des sujets suivants :</target>
             </trans-unit>
             <trans-unit id="116">
                 <source>%login%.or.%signup%.if.you.would.like.to.post</source>
-                <target>%login% or %signup% if you would like to post.</target>
+                <target>%login% ou %signup% si vous souhaitez répondre.</target>
             </trans-unit>
             <trans-unit id="117">
                 <source>List.of.topics</source>
-                <target>List of topics</target>
+                <target>Liste des sujets</target>
             </trans-unit>
             <trans-unit id="118">
                 <source>Latest.topics</source>
-                <target>Latest topics</target>
+                <target>Derniers sujets</target>
             </trans-unit>
             <trans-unit id="119">
                 <source>Latest.topics.in.board</source>
-                <target>Latest topics in board</target>
+                <target>Derniers sujets dans la catégorie</target>
             </trans-unit>
             <trans-unit id="120">
                 <source>%total% topics</source>
-                <target>%total% topics</target>
+                <target>%total% sujets</target>
             </trans-unit>
             <trans-unit id="121">
                 <source>%total% messages</source>
@@ -488,7 +488,7 @@
             </trans-unit>
             <trans-unit id="122">
                 <source>There.are.conflicting.board.names.</source>
-                <target>There are conflicting board names.</target>
+                <target>Il y a un conflit avec les noms de certaines catégories.</target>
             </trans-unit>
         </body>
     </file>
